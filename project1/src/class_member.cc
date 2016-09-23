@@ -1,29 +1,27 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <string.h>
 
 using namespace std;
 
 class Member {
 	private:
-		string	ID;
-		string	name;
 		string	phoneNumber;
 		string	address;
 		char	birthday[9];
 		string	eMail;
 
 	public:
-		Member () {};
-		Member (string pID, string pName, string pPhoneNumber, string pAddress, char pBirthday[8], string pEMail);
-		void operator = (const Member &M);
+		Member (string pID, string pName, string pPhoneNumber, string pAddress, char pBirthday[9], string pEMail);
+		Member& operator = (const Member &M);
 		bool operator ==(const Member &M);
 		bool operator !=(const Member &M);
+		~Member () {};
 		void print();
 };
 
-// the constructor of class "Member"
-Member::Member(string pID, string pName, string pPhoneNumber, string pAddress, char pBirthday[8], string pEMail)
+// an copy constructor of class "Member"
+Member::Member(string pID, string pName, string pPhoneNumber, string pAddress, char pBirthday[9], string pEMail)
 {
 	ID			= pID;
 	name		= pName;
@@ -32,21 +30,25 @@ Member::Member(string pID, string pName, string pPhoneNumber, string pAddress, c
 	strcpy(birthday, pBirthday);
 	eMail		= pEMail;
 }
-void Member::operator= (const Member &M) {
+
+// an assignment operator
+Member&  Member::operator = (const Member &M) {
    ID			= M.ID;
    name			= M.name;
    phoneNumber	= M.phoneNumber;
    address		= M.address;
    eMail		= M.eMail;
    strcpy(birthday, M.birthday);
+
+   return *this;
 }
 
-bool operator ==(const Member &M) {
+bool Member::operator ==(const Member &M) {
 	if (ID == M.ID) return true;
 	else			return false;
 }
 
-bool operator !=(const Member &M) {
+bool Member::operator !=(const Member &M) {
 	if (ID != M.ID) return true;
 	else			return false;
 }
@@ -61,7 +63,11 @@ void Member::print() {
 int main ()
 {
 	char birthday[9] = "19950320";
-	Member me("supernova", "Taeseung", "010-4455-5887", "Seoul", birthday, "dlxotmd125@gmail.com"), you;
+	Member me("supernova", "Taeseung", "010-4455-5887", "Seoul", birthday, "dlxotmd125@gmail.com")
+		   , you("you", "Taeseung", "010-4455-5887", "Seoul", birthday, "dlxotmd125@gmail.com")
+		   , hello(me)
+		   , nyang("SGsupernova", "Taeseung", "010-4455-5887", "Seoul", birthday, "dlxotmd125@gmail.com");
+
 
 	// test overloaded operator =
 	you = me;
@@ -70,8 +76,11 @@ int main ()
 	if (you == me) {
 		cout << "I'm you!" << endl;
 	}
-	if (you != me) {
-		cout << "I'm not you" << endl;
+	if (hello == me) {
+		cout << "hello!" << endl;
+	}
+	if (nyang != me) {
+		cout << "I'm not nyang" << endl;
 	}
 	return 0;
 }
