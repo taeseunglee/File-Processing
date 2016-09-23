@@ -14,3 +14,6 @@
 		- https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines  
  - The Practice of Programming (Brian W.Kernighan
  - http://www.itworld.co.kr/slideshow/86068
+ - cplusplus.com
+		- Copy constructors, assignment operators, exception safe assignment : http://www.cplusplus.com/articles/y8hv0pDG/
+
