@@ -15,10 +15,15 @@ class Member {
 		string	eMail;
 
 	public:
+		// copy constructor
 		Member (string pID, string pName, string pPhoneNumber, string pAddress, char pBirthday[9], string pEMail);
+
+		// operators (assignment, comparision)
 		Member& operator = (const Member &M);
 		bool operator ==(const Member &M);
 		bool operator !=(const Member &M);
+
+		// make member functions that set member variables.
 		void setID (string ID);
 		void setName (string name);
 		void setPhoneNumber (string address);
