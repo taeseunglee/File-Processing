@@ -1,24 +1,9 @@
 #include <iostream>
 #include <cstring>
 #include <string.h>
+#include "class_member.h"
 
 using namespace std;
-
-class Member {
-	private:
-		string	phoneNumber;
-		string	address;
-		char	birthday[9];
-		string	eMail;
-
-	public:
-		Member (string pID, string pName, string pPhoneNumber, string pAddress, char pBirthday[9], string pEMail);
-		Member& operator = (const Member &M);
-		bool operator ==(const Member &M);
-		bool operator !=(const Member &M);
-		~Member () {};
-		void print();
-};
 
 // an copy constructor of class "Member"
 Member::Member(string pID, string pName, string pPhoneNumber, string pAddress, char pBirthday[9], string pEMail)
@@ -53,11 +38,28 @@ bool Member::operator !=(const Member &M) {
 	else			return false;
 }
 
-// test member variable
-void Member::print() {
-	cout  << ID << endl;
+void Member::setID (string ID) {
+	this->ID = ID;
+}
+void Member::setName (string name) {
+	this->name = name;
 }
 
+void Member::setPhoneNumber (string address) {
+	this->address = address;
+}
+
+void Member::setAddress (string address) {
+	this->address = address;
+}
+
+void Member::setBirthday (char birthday[9]) {
+	strcpy(this->birthday, birthday);
+}
+
+void Member::setEmail (string eMail) {
+	this->eMail = eMail;
+}
 
 // testing main function
 int main ()
@@ -71,11 +73,14 @@ int main ()
 
 	// test overloaded operator =
 	you = me;
-	you.print();
 	
 	if (you == me) {
 		cout << "I'm you!" << endl;
 	}
+	if (you != me) {
+		cout << "I'm not you" << endl;
+	}
+
 	if (hello == me) {
 		cout << "hello!" << endl;
 	}
@@ -84,3 +89,4 @@ int main ()
 	}
 	return 0;
 }
+
