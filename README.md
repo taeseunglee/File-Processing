@@ -16,4 +16,5 @@
  - http://www.itworld.co.kr/slideshow/86068
  - cplusplus.com
 		- Copy constructors, assignment operators, exception safe assignment : http://www.cplusplus.com/articles/y8hv0pDG/
-
+ - Class Member name(a person's name) - names
+		- https://github.com/treyhunner/names

@@ -30,6 +30,9 @@ class Member {
 		void setAddress (string address);
 		void setBirthday (char birthday[9]);
 		void setEmail (string eMail);
+
+		// print member variables
+		void print();
 };
 
 #endif

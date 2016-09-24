@@ -61,7 +61,16 @@ void Member::setEmail (string eMail) {
 	this->eMail = eMail;
 }
 
-// testing main function
+void Member::print() {
+	cout << "ID : " << ID << endl;
+	cout << "name : " << name << endl;
+	cout << "phoneNumber : " << phoneNumber << endl;
+	cout << "address : " << address << endl;
+	cout << "email : " << eMail << endl;
+	cout << "birthday : " << birthday << endl;
+}
+
+// test 
 int main ()
 {
 	char birthday[9] = "19950320";
@@ -71,13 +80,19 @@ int main ()
 		   , nyang("SGsupernova", "Taeseung", "010-4455-5887", "Seoul", birthday, "dlxotmd125@gmail.com");
 
 
-	// test overloaded operator =
-	you = me;
-	
-	if (you == me) {
+	// test functions that set member variables.
+	nyang.setID("nyang");
+	nyang.setName("NamKyu");
+	nyang.print();
+
+	// comparison
+	if (you != me) {
 		cout << "I'm you!" << endl;
 	}
-	if (you != me) {
+	
+	// test overloaded operator =
+	you = me;
+	if (you == me) {
 		cout << "I'm not you" << endl;
 	}
 
@@ -86,6 +101,7 @@ int main ()
 	}
 	if (nyang != me) {
 		cout << "I'm not nyang" << endl;
+		
 	}
 	return 0;
 }
