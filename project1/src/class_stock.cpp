@@ -1,25 +1,5 @@
 #include <iostream>
-#include <string>
-
-using namespace std;
-
-class Stock {
-	private:
-		char			ID[13];
-		char			category[9];
-		string			material;
-		char			price[7];
-		int				stock;
-		string			washingInfo;
-		char			size[3];
-
-	public:
-		Stock (char _ID[13], char _category[9], string _material, char _price[7], int _stock, string _washingInfo, char _size[3]);
-		Stock& operator = (const Stock &S);
-		bool operator ==(const Stock &S);
-		bool operator !=(const Stock &S);
-		void print();
-};
+#include "class_stock.h"
 
 // an copy constructor of class "Stock"
 Stock::Stock (char _ID[13], char _category[9], string _material, char _price[7], int _stock, string _washingInfo, char _size[3])
@@ -47,18 +27,41 @@ Stock&  Stock::operator = (const Stock &S) {
 }
 
 bool Stock::operator ==(const Stock &S) {
-	if (ID == S.ID) return true;
+	if (!strcmp(ID, S.ID)) return true;
 	else			return false;
 }
 
 bool Stock::operator !=(const Stock &S) {
-	if (ID != S.ID) return true;
+	if (strcmp(S.ID, ID)) return true;
 	else			return false;
 }
 
-// test member variable
-void Stock::print() {
-	cout  << ID << endl;
+void Stock::setID (char ID[13]) {
+	strcpy(this->ID, ID);
+}
+
+void Stock::setCategory (char category[9]) {
+	strcpy(this->category, category);
+}
+
+void Stock::setMaterial (string material) {
+	this->material = material;
+}
+
+void Stock::setPrice (char price[7]) {
+	strcpy(this->price, price);
+}
+
+void Stock::setStock (int stock) {
+	this->stock = stock;
+}
+
+void Stock::setWashingInfo (string washingInfo) {
+	this->washingInfo = washingInfo;
+}
+
+void Stock::setSize (char size[3]) {
+	strcpy(this->size, size);
 }
 
 
@@ -80,7 +83,6 @@ int main ()
 
 	// test overloaded operator =
 	you = me;
-	you.print();
 	
 	if (you == me) {
 		cout << "I'm you!" << endl;
