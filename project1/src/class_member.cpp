@@ -1,87 +1,64 @@
 #include <iostream>
-#include <cstring>
-#include <string.h>
 #include "class_member.h"
 
 using namespace std;
 
 // an copy constructor of class "Member"
-Member::Member(string pID, string pName, string pPhoneNumber, string pAddress, char pBirthday[9], string pEMail)
-{
-	ID			= pID;
-	name		= pName;
-	phoneNumber = pPhoneNumber;
-	address		= pAddress;
-	strcpy(birthday, pBirthday);
-	eMail		= pEMail;
-}
+Member::Member(const string& id, const string& name, const string& phoneNumber, const string& address, const string& birthday, const string& email)
+	: id(id), name(name), phoneNumber(phoneNumber), address(address), birthday(birthday), email(email) { }
+
+// copy constructor
+Member::Member(const Member& M) : id(M.id), name(M.name), phoneNumber(M.phoneNumber), address(M.address), birthday(M.birthday), email(M.email) { }
 
 // an assignment operator
 Member&  Member::operator = (const Member &M) {
-   ID			= M.ID;
-   name			= M.name;
-   phoneNumber	= M.phoneNumber;
-   address		= M.address;
-   eMail		= M.eMail;
-   strcpy(birthday, M.birthday);
+   this->id				= M.id;
+   this->name			= M.name;
+   this->phoneNumber	= M.phoneNumber;
+   this->address		= M.address;
+   this->email			= M.email;
+   this->birthday		= M.birthday;
 
    return *this;
 }
 
 bool Member::operator ==(const Member &M) {
-	if (ID == M.ID) return true;
+	if (id == M.id) return true;
 	else			return false;
 }
 
 bool Member::operator !=(const Member &M) {
-	if (ID != M.ID) return true;
+	if (id != M.id) return true;
 	else			return false;
 }
 
-void Member::setID (string ID) {
-	this->ID = ID;
-}
-void Member::setName (string name) {
-	this->name = name;
-}
-
-void Member::setPhoneNumber (string address) {
-	this->address = address;
-}
-
-void Member::setAddress (string address) {
-	this->address = address;
-}
-
-void Member::setBirthday (char birthday[9]) {
-	strcpy(this->birthday, birthday);
-}
-
-void Member::setEmail (string eMail) {
-	this->eMail = eMail;
-}
+void Member::setId			(const string& id)		{ this->id = id; }
+void Member::setName		(const string& name)	{ this->name = name; }
+void Member::setPhoneNumber (const string& address)	{ this->address = address; }
+void Member::setAddress		(const string& address)	{ this->address = address; }
+void Member::setBirthday	(const string& birthday){ this->birthday = birthday; }
+void Member::setEmail		(const string& email)	{ this->email = email; }
 
 void Member::print() {
-	cout << "ID : " << ID << endl;
+	cout << "ID : " << id << endl;
 	cout << "name : " << name << endl;
 	cout << "phoneNumber : " << phoneNumber << endl;
 	cout << "address : " << address << endl;
-	cout << "email : " << eMail << endl;
+	cout << "email : " << email << endl;
 	cout << "birthday : " << birthday << endl;
 }
 
 // test 
 int main ()
 {
-	char birthday[9] = "19950320";
-	Member me("supernova", "Taeseung", "010-4455-5887", "Seoul", birthday, "dlxotmd125@gmail.com")
-		   , you("you", "Taeseung", "010-4455-5887", "Seoul", birthday, "dlxotmd125@gmail.com")
+	Member me("supernova", "Taeseung", "010-4455-5887", "Seoul", "19950320", "dlxotmd125@gmail.com")
+		   , you("you", "Taeseung", "010-4455-5887", "Seoul", "19950320", "dlxotmd125@gmail.com")
 		   , hello(me)
-		   , nyang("SGsupernova", "Taeseung", "010-4455-5887", "Seoul", birthday, "dlxotmd125@gmail.com");
+		   , nyang("SGsupernova", "Taeseung", "010-4455-5887", "Seoul", "19950320", "dlxotmd125@gmail.com");
 
 
 	// test functions that set member variables.
-	nyang.setID("nyang");
+	nyang.setId("nyang");
 	nyang.setName("NamKyu");
 	nyang.print();
 
@@ -101,8 +78,8 @@ int main ()
 	}
 	if (nyang != me) {
 		cout << "I'm not nyang" << endl;
-		
 	}
+
 	return 0;
 }
 

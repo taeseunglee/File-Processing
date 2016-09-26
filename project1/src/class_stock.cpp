@@ -1,68 +1,41 @@
 #include <iostream>
 #include "class_stock.h"
 
-// an copy constructor of class "Stock"
-Stock::Stock (char _ID[13], char _category[9], string _material, char _price[7], int _stock, string _washingInfo, char _size[3])
-{
-	strcpy(ID, _ID);
-	strcpy(category, _category);
-	material	= _material;
-	strcpy(price, _price);
-	stock		= _stock;
-	washingInfo = _washingInfo;
-	strcpy(size, _size);
-}
+// an constructor of class "Stock"
+Stock::Stock (const string& id, const string& category, const string& material, const string& price, const int& stock, const string& washingInfo, const string& size)
+	:id(id), category(category), material(material), price(price), stock(stock), washingInfo(washingInfo), size(size) { }
+Stock::Stock(const Stock& S) :id(S.id), category(S.category), material(S.material), price(S.price), stock(S.stock), washingInfo(S.washingInfo), size(S.size) { }
 
 // an assignment operator
 Stock&  Stock::operator = (const Stock &S) {
-	strcpy(ID, S.ID);
-	strcpy(category, S.category);
+	id			= S.id;
+	category	= S.category;
 	material	= S.material;
-	strcpy(price, S.price);
+	price		= S.price;
 	stock		= S.stock;
 	washingInfo = S.washingInfo;
-	strcpy(size, S.size);
+	size		= S.size;
 
    return *this;
 }
 
 bool Stock::operator ==(const Stock &S) {
-	if (!strcmp(ID, S.ID)) return true;
+	if (id == S.id) return true;
 	else			return false;
 }
 
 bool Stock::operator !=(const Stock &S) {
-	if (strcmp(S.ID, ID)) return true;
+	if (id == S.id) return true;
 	else			return false;
 }
 
-void Stock::setID (char ID[13]) {
-	strcpy(this->ID, ID);
-}
-
-void Stock::setCategory (char category[9]) {
-	strcpy(this->category, category);
-}
-
-void Stock::setMaterial (string material) {
-	this->material = material;
-}
-
-void Stock::setPrice (char price[7]) {
-	strcpy(this->price, price);
-}
-
-void Stock::setStock (int stock) {
-	this->stock = stock;
-}
-
-void Stock::setWashingInfo (string washingInfo) {
-	this->washingInfo = washingInfo;
-}
-
-void Stock::setSize (char size[3]) {
-	strcpy(this->size, size);
-}
+void Stock::setId		(const string& id)		{ this->id = id; }
+void Stock::setCategory (const string& category){ this->category = category; }
+void Stock::setMaterial (const string& material){ this->material = material; }
+void Stock::setPrice	(const string& price)	{ this->price = price; }
+void Stock::setStock	(const int& stock)		{ this->stock = stock; }
+void Stock::setWashingInfo (const string& washingInfo) { this->washingInfo = washingInfo; }
+void Stock::setSize		(const string& size) { this->size = size; }
 
 
 // testing main function
@@ -73,8 +46,8 @@ int main ()
 		,size[3] = "X"
 		,ID[13] = "012345678900";
 
-	Stock me(ID, category, "Denim", price, 96, "Dry Cleaning", size)
-		   , you(ID, category, "Denim", price, 96, "Dry Cleaning", size)
+	Stock me("012345678900", "Pants", "Denim", "35,000", 96, "Dry Cleaning", "X")
+		   , you("012345678900", "Pants", "Denim", "35,000", 96, "Dry Cleaning", "XL")
 		   , hello(me);
 
 	if (you == me) {

@@ -1,38 +1,41 @@
 #ifndef __CLASS_MEMBER__
 #define __CLASS_MEMBER__
 
-#include <cstring>
+#include <string>
 
 using namespace std;
 
 class Member {
 	private:
-		string	ID;
+		string	id;
 		string	name;
 		string	phoneNumber;
 		string	address;
-		char	birthday[9];
-		string	eMail;
+		string	birthday;
+		string	email;
 
 	public:
+		// defualt 
+		Member (const string& id, const string& name, const string& phoneNumber, const string& address, const string& birthday, const string& email);
 		// copy constructor
-		Member (string pID, string pName, string pPhoneNumber, string pAddress, char pBirthday[9], string pEMail);
+		Member (const Member& M);
 
 		// operators (assignment, comparision)
 		Member& operator = (const Member &M);
-		bool operator ==(const Member &M);
-		bool operator !=(const Member &M);
+		bool	operator ==(const Member &M);
+		bool	operator !=(const Member &M);
 
 		// make member functions that set member variables.
-		void setID (string ID);
-		void setName (string name);
-		void setPhoneNumber (string address);
-		void setAddress (string address);
-		void setBirthday (char birthday[9]);
-		void setEmail (string eMail);
+		void setId			(const string& id);
+		void setName		(const string& name);
+		void setPhoneNumber (const string& address);
+		void setAddress		(const string& address);
+		void setBirthday	(const string& birthday);
+		void setEmail		(const string& email);
 
 		// print member variables
 		void print();
 };
+
 
 #endif

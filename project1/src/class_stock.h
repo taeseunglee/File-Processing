@@ -1,37 +1,40 @@
 #ifndef __CLASS_STOCK__
 #define __CLASS_STOCK__
 
-#include <cstring>
+#include <string>
 
 using namespace std;
 
 class Stock {
 	private:
-		char			ID[13];
-		char			category[9];
-		string			material;
-		char			price[7];
-		int				stock;
-		string			washingInfo;
-		char			size[3];
+		string	id;
+		string	category;
+		string	material;
+		string	price;
+		int		stock;
+		string	washingInfo;
+		string	size;
 
 	public:
+		// constructor
+		Stock (const string& id, const string& category, const string& material, const string& price, const int& stock, const string& washingInfo, const string& size);
+
 		// copy constructor
-		Stock (char _ID[13], char _category[9], string _material, char _price[7], int _stock, string _washingInfo, char _size[3]);
+		Stock (const Stock& S);
 
 		// operators (assignment, comparison)
-		Stock& operator = (const Stock &S);
-		bool operator ==(const Stock &S);
-		bool operator !=(const Stock &S);
+		Stock&	operator = (const Stock &S);
+		bool	operator ==(const Stock &S);
+		bool	operator !=(const Stock &S);
 
 		// make member functions that set member variables.
-		void setID (char ID[13]);
-		void setCategory (char category[9]);
-		void setMaterial (string material);
-		void setPrice (char price[7]);
-		void setStock (int stock);
-		void setWashingInfo (string washingInfo);
-		void setSize (char size[3]);
+		void setId			(const string&	Id);
+		void setCategory	(const string&	category);
+		void setMaterial	(const string&	material);
+		void setPrice		(const string&	price);
+		void setStock		(const int&		stock);
+		void setWashingInfo (const string&	washingInfo);
+		void setSize		(const string&	size);
 };
 
 #endif
