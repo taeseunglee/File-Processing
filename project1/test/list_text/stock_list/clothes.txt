@@ -1,0 +1,212 @@
+Blouse
+Crop top
+Dress shirt
+Guayabera
+Guernsey
+Halterneck
+Henley shirt
+Hoodie
+Jersey
+Polo shirt
+Shirt
+Sleeveless shirt
+Sweater
+Sweater vest
+T-shirt
+Tube top
+Turtleneck
+Twinset
+Bell-bottoms
+Bermuda shorts
+Bondage pants
+Capri pants
+Cargo pants
+Chaps
+Cycling shorts
+Dress pants
+High water pants
+Lowrise pants
+Jeans
+Jodhpurs
+Leggings
+Overall
+Palazzo pants
+Parachute pants
+Pedal pushers
+Phat pants
+Shorts
+Slim-fit pants
+Sweatpants
+Windpants
+Yoga pants
+A-line skirt
+Ballerina skirt
+Denim skirt
+Men's skirts
+Miniskirt
+Pencil skirt
+Prairie skirt
+Rah-rah skirt
+Sarong
+Skort
+Tutu
+Wrap
+Ball gown
+Bouffant gown
+Coatdress
+Cocktail dress
+Débutante dress
+Formal wear
+Frock
+Evening gown
+Gown
+House dress
+Jumper
+Little black dress
+Princess line
+Sheath dress
+Shirtdress
+Slip dress
+Strapless dress
+Sundress
+Wedding dress
+Wrap dress
+Academic dress
+Ball dress
+Black tie
+Boilersuit
+Cleanroom suit
+Clerical clothing
+Court dress
+Gymslip
+Jumpsuit
+Kasaya
+White coat|Lab coat
+Military uniform
+Morning dress
+Onesie
+Pantsuit
+Red Sea rig
+Romper suit
+School uniform
+Scrubs
+Stroller
+Tuxedo
+Vestment
+White tie
+Apron
+Blazer
+British Warm
+Cagoule
+Cape
+Chesterfield 
+Coat
+Covert coat
+Cut-off
+Duffel coat
+Flight jacket
+Gilet
+Goggle jacket
+Guards coat
+Harrington jacket
+Hoodie
+Jacket
+Leather jacket
+Mess jacket
+Opera coat
+Overcoat
+Parka
+Paletot
+Pea coat
+Poncho
+Raincoat
+Robe
+Safari jacket
+Shawl
+Shrug
+Ski suit
+Sleeved blanket
+Smoking jacket
+Sport coat
+Trench coat
+Ulster coat
+Waistcoat
+Windbreaker
+Bra
+Camisole
+Undershirt
+Diaper
+Panties
+Plastic pants
+Slip
+Thong
+Underpants
+Bodysuit|Adult bodysuit
+Infant bodysuit
+Long underwear
+Playsuit
+Teddy
+Athletic shoe
+Boot
+Court shoe
+Dress shoe
+Flip-flops
+Hosiery
+Sandal
+Shoe
+Spats
+Slipper
+Sock
+Stocking
+Baseball cap
+Beret
+Cap
+Fedora
+Hat
+Helmet
+Hood
+Knit cap
+Toque
+Turban
+Veil
+Babydoll
+Blanket sleeper
+Negligee
+Nightgown
+Nightshirt
+Pajamas
+Bikini
+Burkini
+Boardshorts
+Dry suit
+Monokini
+One-piece
+Rash guard
+Square leg suit
+Swim briefs
+Swim diaper
+Trunks
+Wetsuit
+Belt
+Bow tie
+Coin purse
+Cufflink
+Cummerbund
+Gaiters
+Glasses
+Gloves
+Headband
+Handbag
+Jewellery
+Kerchief
+Muff
+Necktie
+Pocket protector
+Pocket watch
+Sash
+Scarf
+Sunglasses
+Suspenders
+Umbrella
+Wallet
+Wristwatch
