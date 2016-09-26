@@ -1,5 +1,8 @@
 #include <cstdio>
 #include <cstring>
+#include <string>
+#include <iostream>
+#include <fstream>
 
 #define NUM_OF_MEMBERS		1300
 #define NUM_OF_STOCKS		1400
@@ -40,6 +43,8 @@ void makeListMember() {
 
 	for (int i = 0; i < NUM_OF_MEMBERS; i++) {
 		int lenID = (rand() % 4) + 5;
+
+		
 
 		fprintf(fpMember, "%s|%s|%s|%s|%8d|%s\n"
 				,							// ID

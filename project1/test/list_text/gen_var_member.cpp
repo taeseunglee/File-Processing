@@ -62,17 +62,56 @@ string* generateRandomMemberName (int peopleNum) {
 	return peopleName;
 };
 
+string* generateRandomPhoneNumber (int num) {
+	string frontPhoneNumber[ ] = { "010", "010", "010", "010", "010", "011", "016", "017", "018", "019", "010" },
+		   middlePhoneNumber[10000],
+		   lastPhoneNumber[10000];
+
+	char fourNumber[5] = {0,};
+
+	for (int i = 0; i < 10000; i++) {
+		sprintf(fourNumber, "%04d", i);
+		middlePhoneNumber[i] = lastPhoneNumber[i] = string(fourNumber);
+	}
+	
+	string* phoneNumbers = new string [num];
+	
+	srand(time(NULL));
+	
+	for (int i = 0; i < num; i++) {
+		int frontNumber	= rand() % 11,
+			middleNumber= rand() % 10000,
+			lastNumber	= rand() % 10000;
+
+		phoneNumbers[i] = frontPhoneNumber[frontNumber]
+			+ "-" + middlePhoneNumber[middleNumber]
+			+ "-" + lastPhoneNumber[lastNumber];
+		cout << phoneNumbers[i] << endl;
+	}
+
+	return phoneNumbers;
+}
+
 #endif
 
+
+// test
 int main() {
+/*
 	string * people = generateRandomMemberName(130);
 
+
+	// Member :: ID
 
 	for (int i = 0; i < 130; i++) {
 		cout << people[i] << endl;
 	}
-	
-	delete [] people;
+*/	
+
+	string* phone = generateRandomPhoneNumber(10);
+
+
+//	delete [] people;
 
 	return 0;
 }
