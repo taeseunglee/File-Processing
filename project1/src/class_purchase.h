@@ -1,29 +1,30 @@
 #ifndef __CLASS_PURCHASE__
 #define __CLASS_PURCHASE__
 
-#include <cstring>
+#include <string>
 
 using namespace std;
 
 class Purchase {
-	long long int	purchaseID;
-	long long int	stockID;
-	string			memberID;
-	int				quantity;
+	string	purchaseId;
+	string	stockId;
+	string	memberId;
+	int		quantity;
+
 	public:
 		// copy constructor
-		Purchase(long long int purchaseID, long long int stockID, string memberID, int quantity);
+		Purchase(const Purchase& P);
 
 		// operators (assignment, comparison)
-		Purchase& operator = (const Purchase &P);
+		Purchase& operator = (const Purchase& P);
 		bool operator == (const Purchase &P);
 		bool operator != (const Purchase &P);
 
 		// make member functions that set member variables.
-		void setPurchaseID (long long int purchaseID);
-		void setStockID (long long int stockID);
-		void setMemberID (string memberID);
-		void setQuantity (int quantity);
+		void setPurchaseId	(const string& purchaseID);
+		void setStockId		(const string& stockID);
+		void setMemberId	(const string& memberID);
+		void setQuantity	(const int& quantity);
 };
 
 #endif
