@@ -1,4 +1,3 @@
-#include <iostream>
 #include "class_stock.h"
 
 // an constructor of class "Stock"
@@ -37,7 +36,59 @@ void Stock::setStock	(const int& stock)		{ this->stock = stock; }
 void Stock::setWashingInfo (const string& washingInfo) { this->washingInfo = washingInfo; }
 void Stock::setSize		(const string& size) { this->size = size; }
 
+istream& operator >> (istream& is, Stock& S) {
+	string str;
 
+	is.exceptions(istream::failbit | istream::badbit);
+
+	try {
+		getline(is, str);
+	} catch (istream::failure e) {
+		return is;
+	}
+
+	istringstream iss (str);
+	string token;
+
+	
+	getline (iss, token, '|');
+	S.setId (token);
+
+	getline (iss, token, '|');
+	S.setCategory (token);
+
+	getline (iss, token, '|');
+	S.setMaterial (token);
+	
+	getline (iss, token, '|');
+	S.setPrice (token);
+
+	getline (iss, token, '|');
+	S.setStock (stoi(token));
+
+	getline (iss, token, '|');
+	S.setWashingInfo (token);
+
+	getline (iss, token, '|');
+	S.setSize (token);
+
+	return is;
+}
+
+ostream& operator << (ostream& os, const Stock& S) {
+	os << "Stock(ID, Category, Material, Price, Stock, WashingInfo, Size) : " << "(" << S.id;
+	os << ", " << S.category;
+	os << ", " << S.material;
+	os << ", " << S.price;
+	os << ", " << S.stock;
+	os << ", " << S.washingInfo;
+	os << ", " << S.size;
+	os << ")";
+
+	return os;
+}
+
+/*
 // testing main function
 int main ()
 {
@@ -66,4 +117,21 @@ int main ()
 
 	return 0;
 }
+*/
 
+int main() {
+	Stock st;
+	ifstream is;
+	int count;
+	string str;
+
+	is.open("../data/listOfStock.txt");
+	
+	is >> count;
+	getline (is, str);
+
+	is >> st;
+	cout << st << endl;
+
+	return 0;
+}

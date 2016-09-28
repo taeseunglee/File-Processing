@@ -2,6 +2,9 @@
 #define __CLASS_STOCK__
 
 #include <string>
+#include <iostream>
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -16,6 +19,7 @@ class Stock {
 		string	size;
 
 	public:
+		Stock() {};
 		// constructor
 		Stock (const string& id, const string& category, const string& material, const string& price, const int& stock, const string& washingInfo, const string& size);
 
@@ -34,7 +38,12 @@ class Stock {
 		void setPrice		(const string&	price);
 		void setStock		(const int&		stock);
 		void setWashingInfo (const string&	washingInfo);
-		void setSize		(const string&	size);
+
+		// iostream operators
+		friend istream& operator >> (istream& is, Stock& S);
+		friend ostream& operator << (ostream& os, const Stock& S);
+
+	void setSize		(const string&	size);
 };
 
 #endif
