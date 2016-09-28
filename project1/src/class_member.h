@@ -39,9 +39,6 @@ class Member {
 		void setAddress		(const string& address);
 		void setBirthday	(const string& birthday);
 		void setEmail		(const string& email);
-
-		// print member variables
-		void print();
 };
 
 
