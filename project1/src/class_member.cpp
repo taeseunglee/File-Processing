@@ -38,7 +38,7 @@ void Member::setAddress		(const string& address)	{ this->address = address; }
 void Member::setBirthday	(const string& birthday){ this->birthday = birthday; }
 void Member::setEmail		(const string& email)	{ this->email = email; }
 
-istream& operator >> (std::istream& is, Member& M) {
+istream& operator >> (istream& is, Member& M) {
 	string str;
 	
 	is.exceptions(istream::failbit | istream::badbit);

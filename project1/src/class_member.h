@@ -29,7 +29,7 @@ class Member {
 		bool	operator !=(const Member &M);
 
 		// iostream operators
-		friend istream& operator >> (istream& is, const Member& M);
+		friend istream& operator >> (istream& is, Member& M);
 		friend ostream& operator << (ostream& is, const Member& M);
 
 		// make member functions that set member variables.
