@@ -81,6 +81,7 @@ ostream& operator << (ostream& os, const Member& M) {
 	os << ", " << M.address;
 	os << ", " << M.email;
 	os << ", " << M.birthday;
+	os << ")";
 
 	return os;
 }
