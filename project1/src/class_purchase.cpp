@@ -1,7 +1,4 @@
-#include <iostream>
 #include "class_purchase.h"
-
-using namespace std;
 
 Purchase::Purchase (const Purchase& P)
 	:purchaseId(P.purchaseId), stockId(P.stockId), memberId(P.memberId), quantity(P.quantity) { }
@@ -70,23 +67,3 @@ ostream& operator << (ostream& os, const Purchase& P) {
 	return os;
 }
 
-
-int main () {
-	Purchase p;
-	ifstream is;
-	int count;
-	string ll;
-
-	is.open("../data/listOfPurchase.txt");
-
-	is >> count;
-	cout << count << endl;
-	getline(is, ll);
-	is >> p;
-	cout << p << endl;
-	is >> p;
-	cout << p << endl;
-
-
-	return 0;
-}

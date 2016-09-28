@@ -86,19 +86,3 @@ ostream& operator << (ostream& os, const Member& M) {
 	return os;
 }
 
-int main() {
-	Member me("supernova", "Taeseung", "010-4455-5887", "Seoul", "19950320", "dlxotmd125@gmail.com");
-	ifstream is;
-	int count;
-	string ll;
-
-	is.open("../data/listOfMember.txt");
-
-	is >> count;
-	cout << count << endl;
-	getline(is, ll);
-	is >> me;
-	cout << me << endl;
-	is >> me;
-	cout << me << endl;
-}

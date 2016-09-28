@@ -19,6 +19,7 @@ class Member {
 
 	public:
 		// defualt 
+		Member () { };
 		Member (const string& id, const string& name, const string& phoneNumber, const string& address, const string& birthday, const string& email);
 		// copy constructor
 		Member (const Member& M);
