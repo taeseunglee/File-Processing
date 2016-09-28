@@ -2,6 +2,9 @@
 #define __CLASS_MEMBER__
 
 #include <string>
+#include <iostream>
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -24,6 +27,10 @@ class Member {
 		Member& operator = (const Member &M);
 		bool	operator ==(const Member &M);
 		bool	operator !=(const Member &M);
+
+		// iostream operators
+		friend istream& operator >> (istream& is, const Member& M);
+		friend ostream& operator << (ostream& is, const Member& M);
 
 		// make member functions that set member variables.
 		void setId			(const string& id);

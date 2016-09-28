@@ -1,4 +1,3 @@
-#include <iostream>
 #include "class_member.h"
 
 using namespace std;
@@ -34,52 +33,71 @@ bool Member::operator !=(const Member &M) {
 
 void Member::setId			(const string& id)		{ this->id = id; }
 void Member::setName		(const string& name)	{ this->name = name; }
-void Member::setPhoneNumber (const string& address)	{ this->address = address; }
+void Member::setPhoneNumber (const string& phoneNumber)	{ this->phoneNumber = phoneNumber; }
 void Member::setAddress		(const string& address)	{ this->address = address; }
 void Member::setBirthday	(const string& birthday){ this->birthday = birthday; }
 void Member::setEmail		(const string& email)	{ this->email = email; }
 
-void Member::print() {
-	cout << "ID : " << id << endl;
-	cout << "name : " << name << endl;
-	cout << "phoneNumber : " << phoneNumber << endl;
-	cout << "address : " << address << endl;
-	cout << "email : " << email << endl;
-	cout << "birthday : " << birthday << endl;
-}
-
-// test 
-int main ()
-{
-	Member me("supernova", "Taeseung", "010-4455-5887", "Seoul", "19950320", "dlxotmd125@gmail.com")
-		   , you("you", "Taeseung", "010-4455-5887", "Seoul", "19950320", "dlxotmd125@gmail.com")
-		   , hello(me)
-		   , nyang("SGsupernova", "Taeseung", "010-4455-5887", "Seoul", "19950320", "dlxotmd125@gmail.com");
-
-
-	// test functions that set member variables.
-	nyang.setId("nyang");
-	nyang.setName("NamKyu");
-	nyang.print();
-
-	// comparison
-	if (you != me) {
-		cout << "I'm you!" << endl;
-	}
+istream& operator >> (std::istream& is, Member& M) {
+	string str;
 	
-	// test overloaded operator =
-	you = me;
-	if (you == me) {
-		cout << "I'm not you" << endl;
+	is.exceptions(istream::failbit | istream::badbit);
+
+	try {
+		getline (is, str);
+	} catch (istream::failure e) {
+		return is;
 	}
 
-	if (hello == me) {
-		cout << "hello!" << endl;
-	}
-	if (nyang != me) {
-		cout << "I'm not nyang" << endl;
-	}
+	istringstream iss (str);
+	string token;
 
-	return 0;
+
+	getline (iss, token, '|');
+	M.setId (token);
+
+	getline (iss, token, '|');
+	M.setName (token);
+
+	getline (iss, token, '|');
+	M.setPhoneNumber (token);
+
+	getline (iss, token, '|');
+	M.setAddress (token);
+
+	getline (iss, token, '|');
+	M.setEmail (token);
+
+	getline (iss, token, '|');
+	M.setBirthday (token);
+	
+	return is;
 }
 
+ostream& operator << (ostream& os, const Member& M) {
+	os << "Member(ID, Name, Phone Number, Address, Birthday, E-mail) : " << "(" << M.id;
+	os << ", " << M.name;
+	os << ", " << M.phoneNumber;
+	os << ", " << M.address;
+	os << ", " << M.email;
+	os << ", " << M.birthday;
+
+	return os;
+}
+
+int main() {
+	Member me("supernova", "Taeseung", "010-4455-5887", "Seoul", "19950320", "dlxotmd125@gmail.com");
+	ifstream is;
+	int count;
+	string ll;
+
+	is.open("../data/listOfMember.txt");
+
+	is >> count;
+	cout << count << endl;
+	getline(is, ll);
+	is >> me;
+	cout << me << endl;
+	is >> me;
+	cout << me << endl;
+}
