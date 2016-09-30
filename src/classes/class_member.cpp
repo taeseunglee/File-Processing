@@ -86,3 +86,59 @@ ostream& operator << (ostream& os, const Member& M) {
 	return os;
 }
 
+bool Member::Pack (IOBuffer & Buffer) const {
+	int numBytes;
+
+	Buffer.Clear ();
+
+	numBytes = Buffer.Pack (id.c_str());
+	if (numBytes == -1) return false;
+
+	numBytes = Buffer.Pack (name.c_str());
+	if (numBytes == -1) return false;
+
+	numBytes = Buffer.Pack (phoneNumber.c_str());
+	if (numBytes == -1) return false;
+
+	numBytes = Buffer.Pack (address.c_str());
+	if (numBytes == -1) return false;
+
+	numBytes = Buffer.Pack (email.c_str());
+	if (numBytes == -1) return false;
+
+	numBytes = Buffer.Pack (birthday.c_str());
+	if (numBytes == -1) return false;
+
+	return true;
+}
+
+bool Member::Unpack (IOBuffer & Buffer) {
+	int numBytes;
+	char buf[MEM_MAX_BUF];
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	id = buf;
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	name = buf;
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	phoneNumber = buf;
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	address = buf;
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	email = buf;
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	birthday = buf;
+
+	return true;
+}

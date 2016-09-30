@@ -5,8 +5,12 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include "../../include/packing/delim.h"
 
 using namespace std;
+
+#define LEN_BIRTHDAY 9
+#define MEM_MAX_BUF 256
 
 class Member {
 	private:
@@ -40,6 +44,9 @@ class Member {
 		void setAddress		(const string& address);
 		void setBirthday	(const string& birthday);
 		void setEmail		(const string& email);
+
+		bool Pack (IOBuffer & Buffer) const;
+		bool Unpack (IOBuffer & Buffer);
 };
 
 
