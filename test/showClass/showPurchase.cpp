@@ -6,7 +6,7 @@ int main () {
 	int count;
 	string ll;
 
-	is.open("../data/listOfPurchase.txt");
+	is.open("../../resources/listOfPurchase.txt");
 
 	is >> count;
 	getline(is, ll);
