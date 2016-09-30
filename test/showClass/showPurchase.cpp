@@ -1,4 +1,4 @@
-#include "./class_purchase.cpp"
+#include "../../src/class_purchase.cpp"
 
 int main () {
 	Purchase p;

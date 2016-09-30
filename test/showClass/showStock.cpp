@@ -1,4 +1,4 @@
-#include "./class_stock.cpp"
+#include "../../src/class_stock.cpp"
 
 int main() {
 	Stock st;

@@ -1,4 +1,4 @@
-#include "class_member.cpp"
+#include "../../src/class_member.cpp"
 
 int main() {
 	Member me;
