@@ -16,7 +16,7 @@ IOBuffer & IOBuffer :: operator = (const IOBuffer & buffer)
 	BufferSize = buffer . BufferSize;
 	memcpy (Buffer, buffer.Buffer, buffer . BufferSize);
 	NextByte = buffer . NextByte;
-	Packing = Packing;
+	Packing = buffer . Packing;
 	return *this;
 }
 
