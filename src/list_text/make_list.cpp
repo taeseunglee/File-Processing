@@ -21,7 +21,7 @@ int main () {
 	int listCase = 0;
 
 	string* memberIdList = makeListMember()
-		,* stockIdList = makeListStock();
+		, * stockIdList = makeListStock();
 
 	makeListPurchase(memberIdList, stockIdList);
 
