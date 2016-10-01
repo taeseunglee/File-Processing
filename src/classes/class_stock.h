@@ -5,8 +5,11 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include "../../include/packing/delim.h"
 
 using namespace std;
+
+#define STK_MAX_BUF 256
 
 class Stock {
 	private:
@@ -14,14 +17,14 @@ class Stock {
 		string	category;
 		string	material;
 		string	price;
-		int		stock;
+		string	stock;
 		string	washingInfo;
 		string	size;
 
 	public:
 		Stock() {};
 		// constructor
-		Stock (const string& id, const string& category, const string& material, const string& price, const int& stock, const string& washingInfo, const string& size);
+		Stock (const string& id, const string& category, const string& material, const string& price, const string& stock, const string& washingInfo, const string& size);
 
 		// copy constructor
 		Stock (const Stock& S);
@@ -36,14 +39,16 @@ class Stock {
 		void setCategory	(const string&	category);
 		void setMaterial	(const string&	material);
 		void setPrice		(const string&	price);
-		void setStock		(const int&		stock);
+		void setStock		(const string&	stock);
 		void setWashingInfo (const string&	washingInfo);
+		void setSize		(const string&	size);
 
 		// iostream operators
 		friend istream& operator >> (istream& is, Stock& S);
 		friend ostream& operator << (ostream& os, const Stock& S);
 
-	void setSize		(const string&	size);
+		bool Pack (IOBuffer & Buffer) const;
+		bool Unpack (IOBuffer & Buffer);
 };
 
 #endif
