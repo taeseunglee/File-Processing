@@ -1,6 +1,6 @@
 SRC_DIR = ../..
-TARGET = buffile delim iobuffer varlen
-PART_NAME = packing
+TARGET = class_member class_stock class_purchase
+PART_NAME = classes
 
 build: $(addsuffix .o, $(TARGET))
 

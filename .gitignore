@@ -21,7 +21,7 @@
 *.app
 
 # CMake build and output folders
-# build/
+built/
 # bin/
 # lib/
 .DS_Store
