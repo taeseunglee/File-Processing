@@ -24,4 +24,5 @@
 built/
 # bin/
 # lib/
+*.dat
 .DS_Store
