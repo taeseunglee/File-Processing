@@ -1,3 +1,7 @@
+#include "./classes/class_member.h"
+#include "./classes/class_stock.h"
+#include "./classes/class_purchase.h"
+
 #include "./showClass/showMember.cpp"
 #include "./showClass/showPurchase.cpp"
 #include "./showClass/showStock.cpp"
@@ -5,17 +9,24 @@
 #include "./packingTest/memberTest.cpp"
 #include "./packingTest/purchaseTest.cpp"
 #include "./packingTest/stockTest.cpp"
+#include "environment.h"
 
-bool selectMenu ();
-bool ticketPurchaseSystem ();
+bool selectMenu (Environment &env);
+bool ticketPurchaseSystem (Environment &env);
+
 
 int main() {
-	while(selectMenu());
+	Environment env;
+
+	setEnvironment(env);
+
+	// TODO : 시작할 때 .txt -> .dat로 바꾸는 작업을 한다.
+	while(selectMenu(env));
 
 	return 0;
 }
 
-bool selectMenu () {
+bool selectMenu (Environment &env) {
 	cout << "=================================================" << endl;
 	cout << "\t\tSelect the memu." << endl;
 	cout << "1: showMember" << endl;
@@ -42,7 +53,7 @@ bool selectMenu () {
 		case 5: stockTest(); break;
 		case 6: purchaseTest(); break;
 
-		case 7: while(ticketPurchaseSystem()); break;
+		case 7: while(ticketPurchaseSystem(env)); break;
 		case 8: default: return result = false;
 	}
 
@@ -50,7 +61,7 @@ bool selectMenu () {
 	return result;
 }
 
-bool ticketPurchaseSystem () {
+bool ticketPurchaseSystem (Environment &env) {
 	cout << "=================================================" << endl << ">> ";
 	cout << "\t\tTicketPurchaseSystem" << endl;
 	cout << "1: Search record" << endl;

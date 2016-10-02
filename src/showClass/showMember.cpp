@@ -17,6 +17,8 @@ void showMember () {
 		is >> me;
 		cout << me << endl;
 	}
+	
+	is.close();
 };
 
 #ifdef test_showMember
