@@ -6,7 +6,6 @@ TEST_DIR = packingTest
 PART_NAME = onlineShoppingSystem
 TARGET = onlineShoppingSystem
 
-
 build: build.packing build.class .mkdir.o
 	g++ -c $(TARGET).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TARGET).o
 	g++ -o $(BUILT_DIR)/$(TARGET) $(OBJS_DIR)/**/*.o

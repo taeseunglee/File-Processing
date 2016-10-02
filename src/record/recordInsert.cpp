@@ -4,71 +4,68 @@
 #include "../classes/class_purchase.h"
 #include "../classes/class_stock.h"
 
+#include "../environment.h"
 #include "../../include/packing/recfile.h"
 #include <fstream>
 #include <vector>
+#include <cstring>
 
-void recordInsertMain() {
-	cout << "=================================================" << endl;
-	cout << "\t\tSelect the memu." << endl;
-	cout << "1: Member " << endl;
-	cout << "2: Ticket " << endl;
-	cout << "3: Purchase " << endl;
-	cout << "4: EXIT" << endl << endl;
-	cout << "Please enter the number of the menu." << endl;
-	cout << "=================================================" << endl << ">> ";
+#ifdef test_recordInsert
+int main() {
 
-	int menuNum;
-	cin >> menuNum;
-
-	switch (menuNum) {
-		case 1: recordInsertMember(); break;
-		case 2: recordInsertStock(); break;
-		case 3: recordInsertPurchase(); break;
-		case 4: break;
-	}
+	return 0;
 }
+#endif
 
-void recordInsertMember() {
-	char filename[ ] = "../resources/fileOfMember.dat";
+template<class T>
+void recordInsert(vector<T> &tData, string strfilename) {
+	char *filename = new char [strfilename.length() + 1];
+	std::strcpy (filename, strfilename.c_str());
 	ifstream ifs (filename);
 
+	int n;
+	ifs >> n;
 	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
 
 	DelimFieldBuffer buffer ('|', MEM_MAX_BUF);
-	RecordFile <Member> memberFile (buffer);
+	RecordFile <T> tFile (buffer);
+
+	T newTemp;
+	getNewClass(newTemp);
+
+
 
 	// Write test
-	memberFile.Create (filename, ios::out | ios::trunc);
-	for (int i = 0; i < n; i++) {
-		Member m;
-		ifs >> m;
+	tFile.Create (filename, ios::out | ios::trunc);
+	bool overlapFlag = false;
+
+	if (overlapCheck(tData, newTemp)) {
+		overlapFlag = true;
+		cout << "It is overlapped!" << endl;
+	}
+	else {
+		bool errorFlag = false;
+		for (int i = 0; i < n; i++) {
+			T t;
+			ifs >> t;
 		
-		if (newMember)
-
-		int recAddr;
-		if ((recAddr = memberFile.Write(m)) == -1) { cout << "Write Error!" << endl; }
-		else { cout << "Write at " << recAddr << endl; }
+			int recAddr;
+			if ((recAddr = tFile.Write(t)) == -1) {
+				cout << "Insert Error!" << endl;
+				errorFlag = true;
+			}
+		}
+		if (!errorFlag) {
+			int recAddr;
+			if((recAddr = tFile.Write(newTemp)) == -1) { cout << "Insert Error!" << endl; }
+			else {
+				insertToEnv(tData, newTemp);
+			}
+		}	
 	}
-	memberFile.Close ();
+	tFile.Close ();
 
-
-	// Read Test
-	memberFile.Open (filename, ios::in);
-	for (int i = 0; i < n; i++) {
-		Member m;
-		memberFile.Read(m);
-		cout << m;
-	}
-	memberFile.Close();
-}
-
-void recordInsertStock() {
-	
-}
-
-void recordInsertPurchase() {
-
+	delete [] filename;
 }
 
 void getNewClass(Member &newMember) {
@@ -76,7 +73,7 @@ void getNewClass(Member &newMember) {
 	
 	cout << "Enter Member's fields" << endl;
 	cout << "ID : ";		cin >> temp; newMember.setId(temp);
-	cout << "Name : ";		getline(cin, temp); newMember.setName(temp);
+	cout << "Name : ";		getline(cin, temp); getline(cin, temp); newMember.setName(temp);
 	cout << "phoneNumber : "; cin >> temp; newMember.setPhoneNumber(temp);
 	cout << "address : ";	cin >> temp; newMember.setAddress(temp);
 	cout << "birthday : ";	cin >> temp; newMember.setBirthday(temp);
@@ -100,14 +97,42 @@ void getNewClass(Purchase &newPurchase) {
 	string temp;
 	
 	cout << "Enter Purchase's fields" << endl;
-	cout << "Purchase's Id" 
+	cout << "PurchaseId : ";cin >> temp;	newPurchase.setPurchaseId(temp);
+	cout << "StockId : ";	cin >> temp;	newPurchase.setStockId(temp);
+	cout << "MemberId : ";	cin >> temp;	newPurchase.setMemberId(temp);
+	cout << "Quantity : ";	cin >> temp;	newPurchase.setQuantity(temp);
 }
 
-#ifdef test_recordInsert
-int main() {
+void recordInsertMain(Environment &env) {
+	cout << "=================================================" << endl;
+	cout << "\t\tSelect the memu." << endl;
+	cout << "1: Member " << endl;
+	cout << "2: Ticket " << endl;
+	cout << "3: Purchase " << endl;
+	cout << "4: EXIT" << endl << endl;
+	cout << "Please enter the number of the menu." << endl;
+	cout << "=================================================" << endl << ">> ";
 
-	return 0;
+	int menuNum;
+	cin >> menuNum;
+
+	string filename = "../resources/fileOf";
+	switch (menuNum) {
+		case 1:
+			filename = filename + "Member.dat";
+			recordInsert(env.memberData, filename);
+			break;
+		case 2:
+			filename = filename + "Stock.dat";
+			recordInsert(env.stockData, filename);
+			break;
+		case 3: 
+			filename = filename + "Purchase.dat";
+			recordInsert(env.purchaseData, filename);
+			break;
+		case 4: break;
+	}
 }
-#endif
+
 
 #endif

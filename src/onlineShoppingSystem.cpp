@@ -11,6 +11,8 @@
 #include "./packingTest/stockTest.cpp"
 #include "environment.h"
 
+#include "./record/recordInsert.cpp"
+
 bool selectMenu (Environment &env);
 bool ticketPurchaseSystem (Environment &env);
 
@@ -19,7 +21,7 @@ int main() {
 	Environment env;
 
 	setEnvironment(env);
-
+	findFromEnv(env.memberData, "gclLvIAM2BA");
 	// TODO : 시작할 때 .txt -> .dat로 바꾸는 작업을 한다.
 	while(selectMenu(env));
 
@@ -78,7 +80,7 @@ bool ticketPurchaseSystem (Environment &env) {
 	bool result = true;
 	switch (menuNum) {
 		case 1: break;
-		case 2: break;
+		case 2: recordInsertMain(env); break;
 		case 3: break;
 		case 4: break;
 		case 5: default: return result = false;
