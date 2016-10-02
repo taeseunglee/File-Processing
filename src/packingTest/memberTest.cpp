@@ -6,12 +6,13 @@
 #include <fstream>
 #include <vector>
 
-void memberTest () {
+void memberTest (int n = 10) {
 	ifstream ifs ("../resources/listOfMember.txt");
 	char filename[ ] = "fileOfMember.dat";
 
-	int n;
-	ifs >> n;
+	if (n != 10) {
+		ifs >> n;
+	}
 	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
 
 	DelimFieldBuffer buffer ('|', MEM_MAX_BUF);

@@ -6,12 +6,13 @@
 #include <fstream>
 #include <vector>
 
-void stockTest () {
+void stockTest (int n = 10) {
 	ifstream ifs ("../resources/listOfStock.txt");
 	char filename[ ] = "fileOfStock.dat";
 
-	int n;
-	ifs >> n;
+	if (n != 10) {
+		ifs >> n;
+	}
 	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
 
 	DelimFieldBuffer buffer ('|', STK_MAX_BUF);

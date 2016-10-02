@@ -6,12 +6,13 @@
 #include <fstream>
 #include <vector>
 
-void purchaseTest() {
+void purchaseTest(int n = 10) {
 	ifstream ifs ("../resources/listOfPurchase.txt");
 	char filename[ ] = "fileOfPurchase.dat";
 
-	int n;
-	ifs >> n;
+	if (n != 10) {
+		ifs >> n;
+	}
 	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
 
 	DelimFieldBuffer buffer ('|', PUR_MAX_BUF);
