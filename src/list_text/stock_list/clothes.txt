@@ -81,7 +81,7 @@ Court dress
 Gymslip
 Jumpsuit
 Kasaya
-White coat|Lab coat
+Lab coat
 Military uniform
 Morning dress
 Onesie
@@ -141,7 +141,7 @@ Plastic pants
 Slip
 Thong
 Underpants
-Bodysuit|Adult bodysuit
+Adult bodysuit
 Infant bodysuit
 Long underwear
 Playsuit

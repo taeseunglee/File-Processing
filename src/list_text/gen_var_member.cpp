@@ -3,6 +3,7 @@
 
 #define NUM_FIRST_NAME		500
 #define NUM_LAST_NAME		1000
+#define NUM_CITY 85
 
 #include <cstdlib>
 #include <cstdio>
@@ -24,8 +25,8 @@ string*  generateRandomMemberId (int num) {
 			  lenAlphaNum = sizeof(alphaNum);
 		char* genStr = new char[lenStr + 1];
 
-		for (int i = 0; i < lenStr; ++i) {
-			genStr[i] = alphaNum[rand() % lenAlphaNum];
+		for (int j = 0; j < lenStr; ++j) {
+			genStr[j] = alphaNum[rand() % lenAlphaNum];
 		}
 		genStr[lenStr] = '\0';
 
@@ -103,21 +104,19 @@ string* generateRandomPhoneNumber (int num) {
 		phoneNumbers[i] = frontPhoneNumber[frontNumber]
 			+ "-" + middlePhoneNumber[middleNumber]
 			+ "-" + lastPhoneNumber[lastNumber];
-		cout << phoneNumbers[i] << endl;
 	}
 
 	return phoneNumbers;
 }
 
 string* generateRandomAddress() {
-	const int NUM_CITY = 135;
 	ifstream cityFile;
 	cityFile.open("cityName.txt");
 
 	string* addressList = new string[NUM_CITY];
 
 	for (int i = 0; i < NUM_CITY; i++) {
-		cityFile >> addressList[i];
+		getline(cityFile,addressList[i]);
 	}
 
 	return addressList;
@@ -147,9 +146,7 @@ string* generateRandomBirthday(int num) {
 		sprintf(birthday, "%04d%02d%02d", year, month, day);
 		birthdayArr[i] = string(birthday);
 
-		cout << birthdayArr[i] << endl;
 	}
-
 	return birthdayArr;
 }
 

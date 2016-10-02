@@ -12,7 +12,7 @@
 using namespace std;
 
 #define MAX_GEN		1400
-#define MAX_CLOTH 212
+#define MAX_CLOTH	212
 #define MAX_TEXTILE 139
 #define MAX_WASHING 7
 

@@ -21,7 +21,7 @@ int main () {
 	int listCase = 0;
 
 	string* memberIdList = makeListMember()
-		, * stockIdList = makeListStock();
+		,* stockIdList = makeListStock();
 
 	makeListPurchase(memberIdList, stockIdList);
 
@@ -39,7 +39,7 @@ string* makeListMember() {
 		fprintf(stderr, "An error occurs during making a text file - listOfMembers");
 	}
 
-	printf("Make a listofMembers");
+	printf("Make a listofMembers\n");
 
 	fprintf(fpMember, "%d\n", NUM_OF_MEMBERS);
 
@@ -57,18 +57,17 @@ string* makeListMember() {
 				,idList[i].c_str()							// ID
 				,fullName.c_str()							// Name
 				,phoneList[i].c_str()						// Phone Number
-				,addressList[i%135].c_str()						// Address
+				,addressList[i%NUM_CITY].c_str()						// Address
 				,birthdayList[i].c_str()					// Birthday
 				,fullEmail.c_str()							// E-mail
 				);
 	}
-
+	
 	delete [] phoneList;
 	delete [] addressList;
 	delete [] birthdayList;
 
 	fclose(fpMember);
-
 	return idList;
 }
 
