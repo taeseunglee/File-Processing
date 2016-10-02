@@ -5,14 +5,18 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "../../include/packing/delim.h"
+
 
 using namespace std;
+
+#define PUR_MAX_BUF 256
 
 class Purchase {
 	string	purchaseId;
 	string	stockId;
 	string	memberId;
-	int		quantity;
+	string	quantity;
 
 	public:
 		Purchase () {};
@@ -28,10 +32,13 @@ class Purchase {
 		void setPurchaseId	(const string& purchaseID);
 		void setStockId		(const string& stockID);
 		void setMemberId	(const string& memberID);
-		void setQuantity	(const int& quantity);
+		void setQuantity	(const string& quantity);
 
 		friend istream& operator >> (istream& is, Purchase& P);
 		friend ostream& operator << (ostream& os, const Purchase& P);
+		
+		bool Pack (IOBuffer & Buffer) const;
+		bool Unpack (IOBuffer & Buffer);
 };
 
 #endif

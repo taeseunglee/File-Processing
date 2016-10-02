@@ -25,7 +25,7 @@ bool Purchase::operator != (const Purchase &P) {
 void Purchase::setPurchaseId(const string& purchaseId)	{ this->purchaseId = purchaseId; }
 void Purchase::setStockId	(const string& stockId)		{ this->stockId = stockId; }
 void Purchase::setMemberId	(const string& memberId)	{ this->memberId = memberId; }
-void Purchase::setQuantity	(const int& quantity)		{ this->quantity = quantity; }
+void Purchase::setQuantity	(const string& quantity)		{ this->quantity = quantity; }
 
 istream& operator >> (istream& is, Purchase& P) {
 	string str;
@@ -52,7 +52,7 @@ istream& operator >> (istream& is, Purchase& P) {
 	P.setMemberId (token);
 
 	getline (iss, token, '|');
-	P.setQuantity (stoi(token));
+	P.setQuantity (token);
 	
 	return is;
 }
@@ -67,3 +67,45 @@ ostream& operator << (ostream& os, const Purchase& P) {
 	return os;
 }
 
+bool Purchase::Pack (IOBuffer & Buffer) const {
+	int numBytes;
+
+	Buffer.Clear ();
+
+	numBytes = Buffer.Pack (purchaseId.c_str());
+	if (numBytes == -1) return false;
+
+	numBytes = Buffer.Pack (stockId.c_str());
+	if (numBytes == -1) return false;
+
+	numBytes = Buffer.Pack (memberId.c_str());
+	if (numBytes == -1) return false;
+
+	numBytes = Buffer.Pack (quantity.c_str());
+	if (numBytes == -1) return false;
+
+	return true;
+}
+
+bool Purchase::Unpack (IOBuffer & Buffer) {
+	int numBytes;
+	char buf[PUR_MAX_BUF];
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	purchaseId = buf;
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	stockId = buf;
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	memberId = buf;
+
+	numBytes = Buffer.Unpack (buf);
+	if (numBytes == -1) return false;
+	quantity = buf;
+
+	return true;
+}
