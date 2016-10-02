@@ -9,17 +9,17 @@ TEST_STOCK = stockTest
 TEST_PURCHASE = purchaseTest
 
 $(TEST_MEMBER): build.packing build.class .mkdir.o
-	g++ -c $(TEST_MEMBER).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TEST_MEMBER).o
+	g++ -c $(TEST_MEMBER).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TEST_MEMBER).o -D test_$(TEST_MEMBER)
 	g++ -o $(BUILT_DIR)/$(TEST_MEMBER) $(OBJS_DIR)/packing/*.o $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(TEST_MEMBER).o
 
 
 $(TEST_STOCK): build.packing build.class .mkdir.o
-	g++ -c $(TEST_STOCK).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TEST_STOCK).o
+	g++ -c $(TEST_STOCK).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TEST_STOCK).o -D test_$(TEST_STOCK)
 	g++ -o $(BUILT_DIR)/$(TEST_STOCK) $(OBJS_DIR)/packing/*.o $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(TEST_STOCK).o
 
 
 $(TEST_PURCHASE): build.packing build.class .mkdir.o
-	g++ -c $(TEST_PURCHASE).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TEST_PURCHASE).o
+	g++ -c $(TEST_PURCHASE).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TEST_PURCHASE).o -D test_$(TEST_PURCHASE)
 	g++ -o $(BUILT_DIR)/$(TEST_PURCHASE) $(OBJS_DIR)/packing/*.o $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(TEST_PURCHASE).o
 
 

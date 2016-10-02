@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 
-int main() {
+void memberTest () {
 	ifstream ifs ("../../resources/listOfMember.txt");
 	char filename[ ] = "fileOfMember.dat";
 
@@ -35,6 +35,12 @@ int main() {
 		cout << m;
 	}
 	memberFile.Close();
+};
+
+#ifdef test_memberTest
+int main() {
+	memberTest();
 
 	return 0;
 }
+#endif

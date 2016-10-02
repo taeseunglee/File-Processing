@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 
-int main() {
+void stockTest () {
 	ifstream ifs ("../../resources/listOfStock.txt");
 	char filename[ ] = "fileOfStock.dat";
 
@@ -35,6 +35,12 @@ int main() {
 		cout << m;
 	}
 	stockFile.Close();
+};
+
+#ifdef test_stockTest
+int main() {
+	stockTest();
 
 	return 0;
 }
+#endif

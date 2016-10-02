@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 
-int main() {
+void purchaseTest() {
 	ifstream ifs ("../../resources/listOfPurchase.txt");
 	char filename[ ] = "fileOfPurchase.dat";
 
@@ -36,5 +36,12 @@ int main() {
 	}
 	purchaseFile.Close();
 
+};
+
+#ifdef test_purchaseTest
+int main() {
+	purchaseTest();
+
 	return 0;
 }
+#endif
