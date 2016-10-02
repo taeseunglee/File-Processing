@@ -33,6 +33,10 @@ class Purchase {
 		void setStockId		(const string& stockID);
 		void setMemberId	(const string& memberID);
 		void setQuantity	(const string& quantity);
+		
+		string getPurchaseId()	const { return purchaseId; };
+		string getStockId()		const { return stockId; };
+		string getMemberId()	const { return memberId; };
 
 		friend istream& operator >> (istream& is, Purchase& P);
 		friend ostream& operator << (ostream& os, const Purchase& P);

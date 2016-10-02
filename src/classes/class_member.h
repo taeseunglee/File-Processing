@@ -45,6 +45,8 @@ class Member {
 		void setBirthday	(const string& birthday);
 		void setEmail		(const string& email);
 
+		string getId() const { return id; };
+
 		bool Pack (IOBuffer & Buffer) const;
 		bool Unpack (IOBuffer & Buffer);
 };

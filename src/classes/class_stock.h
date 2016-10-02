@@ -42,6 +42,8 @@ class Stock {
 		void setStock		(const string&	stock);
 		void setWashingInfo (const string&	washingInfo);
 		void setSize		(const string&	size);
+		
+		string getId() const { return id; };
 
 		// iostream operators
 		friend istream& operator >> (istream& is, Stock& S);
