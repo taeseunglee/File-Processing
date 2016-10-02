@@ -24,5 +24,4 @@
 built/
 # bin/
 # lib/
-resources/
 .DS_Store
