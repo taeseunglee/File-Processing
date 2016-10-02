@@ -9,7 +9,7 @@ void showStock () {
 	int count;
 	string str;
 
-	is.open("../../resources/listOfStock.txt");
+	is.open("../resources/listOfStock.txt");
 	
 	is >> count;
 	getline (is, str);

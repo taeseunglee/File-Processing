@@ -9,7 +9,7 @@ void showMember () {
 	int count;
 	string ll;
 
-	is.open("../../resources/listOfMember.txt");
+	is.open("../resources/listOfMember.txt");
 
 	is >> count;
 	getline(is, ll);

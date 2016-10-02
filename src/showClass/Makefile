@@ -1,11 +1,14 @@
 SRC_DIR = ../..
 CLASS_DIR = ../classes
 PART_NAME = showClass
+TARGET = showMember showStock showPurchase
 
 
 SHOW_MEMBER = showMember
 SHOW_STOCK = showStock
 SHOW_PURCHASE = showPurchase
+
+build: $(addsuffix .o, $(TARGET))
 
 $(SHOW_MEMBER): build.class .mkdir.o
 	g++ -c $(SHOW_MEMBER).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_MEMBER).o -D test_$(SHOW_MEMBER)
