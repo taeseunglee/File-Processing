@@ -1,6 +1,9 @@
-#include "../../src/classes/class_purchase.cpp"
+#ifndef __SHOW_PURCHASE__
+#define __SHOW_PURCHASE__
 
-int main () {
+#include "../../src/classes/class_purchase.h"
+
+void showPurchase () {
 	Purchase p;
 	ifstream is;
 	int count;
@@ -15,6 +18,15 @@ int main () {
 		is >> p;
 		cout << p << endl;
 	}
+}
+
+#ifdef test_showPurchase
+int main () {
+	showPurchase();
 
 	return 0;
 }
+#endif
+
+
+#endif

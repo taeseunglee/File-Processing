@@ -1,6 +1,9 @@
+#ifndef __SHOW_MEMBER__
+#define __SHOW_MEMBER__
+
 #include "../../src/classes/class_member.h"
 
-int main() {
+void showMember () {
 	Member me;
 	ifstream is;
 	int count;
@@ -14,6 +17,14 @@ int main() {
 		is >> me;
 		cout << me << endl;
 	}
+};
+
+#ifdef test_showMember
+int main() {
+	showMember();
 
 	return 0;
 }
+#endif
+
+#endif
