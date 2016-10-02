@@ -1,3 +1,6 @@
+#ifndef __MEMBER_TEST__
+#define __MEMBER_TEST__
+
 #include "../classes/class_member.h"
 #include "../../include/packing/recfile.h"
 #include <fstream>
@@ -43,4 +46,6 @@ int main() {
 
 	return 0;
 }
+#endif
+
 #endif
