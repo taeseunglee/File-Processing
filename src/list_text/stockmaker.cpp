@@ -57,6 +57,7 @@ string* makeListStock(){
 
 		stockId[i] = string(strId);
 
+		// price
 		if(price >= 1000){
 			ss << price/1000;
 			output = output + ss.str() + ",";
