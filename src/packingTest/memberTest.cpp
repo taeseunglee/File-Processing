@@ -8,7 +8,7 @@
 
 void memberTest (int n = 10) {
 	ifstream ifs ("../resources/listOfMember.txt");
-	char filename[ ] = "fileOfMember.dat";
+	char filename[ ] = "../resources/fileOfMember.dat";
 
 	if (n != 10) {
 		ifs >> n;

@@ -8,7 +8,7 @@
 
 void stockTest (int n = 10) {
 	ifstream ifs ("../resources/listOfStock.txt");
-	char filename[ ] = "fileOfStock.dat";
+	char filename[ ] = "../resources/fileOfStock.dat";
 
 	if (n != 10) {
 		ifs >> n;

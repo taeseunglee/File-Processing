@@ -8,7 +8,7 @@
 
 void purchaseTest(int n = 10) {
 	ifstream ifs ("../resources/listOfPurchase.txt");
-	char filename[ ] = "fileOfPurchase.dat";
+	char filename[ ] = "../resources/fileOfPurchase.dat";
 
 	if (n != 10) {
 		ifs >> n;
