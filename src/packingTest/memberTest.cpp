@@ -7,7 +7,7 @@
 #include <vector>
 
 void memberTest () {
-	ifstream ifs ("../../resources/listOfMember.txt");
+	ifstream ifs ("../resources/listOfMember.txt");
 	char filename[ ] = "fileOfMember.dat";
 
 	int n;

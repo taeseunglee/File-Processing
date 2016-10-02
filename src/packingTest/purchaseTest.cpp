@@ -7,7 +7,7 @@
 #include <vector>
 
 void purchaseTest() {
-	ifstream ifs ("../../resources/listOfPurchase.txt");
+	ifstream ifs ("../resources/listOfPurchase.txt");
 	char filename[ ] = "fileOfPurchase.dat";
 
 	int n;

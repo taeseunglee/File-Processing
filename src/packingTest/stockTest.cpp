@@ -7,7 +7,7 @@
 #include <vector>
 
 void stockTest () {
-	ifstream ifs ("../../resources/listOfStock.txt");
+	ifstream ifs ("../resources/listOfStock.txt");
 	char filename[ ] = "fileOfStock.dat";
 
 	int n;

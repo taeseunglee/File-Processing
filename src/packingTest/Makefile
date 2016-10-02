@@ -1,12 +1,15 @@
 SRC_DIR = ../..
 PACKING_DIR = ../../include/packing
 CLASS_DIR = ../classes
+TARGET = memberTest stockTest purchaseTest
 PART_NAME = classTest
 
 
 TEST_MEMBER = memberTest
 TEST_STOCK = stockTest
 TEST_PURCHASE = purchaseTest
+
+build: $(addsuffix .o, $(TARGET))
 
 $(TEST_MEMBER): build.packing build.class .mkdir.o
 	g++ -c $(TEST_MEMBER).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TEST_MEMBER).o -D test_$(TEST_MEMBER)
@@ -21,6 +24,7 @@ $(TEST_STOCK): build.packing build.class .mkdir.o
 $(TEST_PURCHASE): build.packing build.class .mkdir.o
 	g++ -c $(TEST_PURCHASE).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TEST_PURCHASE).o -D test_$(TEST_PURCHASE)
 	g++ -o $(BUILT_DIR)/$(TEST_PURCHASE) $(OBJS_DIR)/packing/*.o $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(TEST_PURCHASE).o
+
 
 
 .PHONY: build.packing
