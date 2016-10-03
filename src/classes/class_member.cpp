@@ -103,12 +103,11 @@ bool Member::Pack (IOBuffer & Buffer) const {
 	numBytes = Buffer.Pack (address.c_str());
 	if (numBytes == -1) return false;
 
-	numBytes = Buffer.Pack (email.c_str());
-	if (numBytes == -1) return false;
-
 	numBytes = Buffer.Pack (birthday.c_str());
 	if (numBytes == -1) return false;
 
+	numBytes = Buffer.Pack (email.c_str());
+	if (numBytes == -1) return false;
 	return true;
 }
 
@@ -134,11 +133,13 @@ bool Member::Unpack (IOBuffer & Buffer) {
 
 	numBytes = Buffer.Unpack (buf);
 	if (numBytes == -1) return false;
-	email = buf;
-
+	birthday = buf;
+	
 	numBytes = Buffer.Unpack (buf);
 	if (numBytes == -1) return false;
-	birthday = buf;
+	email = buf;
+
+
 
 	return true;
 }
