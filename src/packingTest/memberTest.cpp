@@ -6,13 +6,16 @@
 #include <fstream>
 #include <vector>
 
-void memberTest (int n = 10) {
+// If you want to execute memberTest, call memberTest(), that is, you stop doing parameter passing.
+// If you just want to make .dat file from .txt, call memberTest(arg) and this argument must not be 10. I recomend call memberTest(-1);
+void memberTest (int flag = 10) {
 	ifstream ifs ("../resources/listOfMember.txt");
-	char filename[ ] = "../resources/fileOfMember.dat";
+	char filename[ ] = "../built/fileOfMember.dat";
 
-	if (n != 10) {
-		ifs >> n;
-	}
+	int n = 0;
+
+	if (flag != 10) { ifs >> n; }
+	else			{ n = 10; }
 	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
 
 	DelimFieldBuffer buffer ('|', MEM_MAX_BUF);
@@ -26,19 +29,21 @@ void memberTest (int n = 10) {
 		
 		int recAddr;
 		if ((recAddr = memberFile.Write(m)) == -1) { cout << "Write Error!" << endl; }
-		else { cout << "Write at " << recAddr << endl; }
+		else if (flag == 10) { cout << "Write at " << recAddr << endl; }
 	}
 	memberFile.Close ();
 
 
-	// Read Test
-	memberFile.Open (filename, ios::in);
-	for (int i = 0; i < n; i++) {
-		Member m;
-		memberFile.Read(m);
-		cout << m;
+	if (flag == 10) {
+		// Read Test
+		memberFile.Open (filename, ios::in);
+		for (int i = 0; i < n; i++) {
+			Member m;
+			memberFile.Read(m);
+			cout << m;
+		}
+		memberFile.Close();
 	}
-	memberFile.Close();
 };
 
 #ifdef test_memberTest
