@@ -46,7 +46,6 @@ void memberTest (int flag = 10) {
 		}
 		memberFile.Close();
 	}
-
 };
 
 #ifdef test_memberTest
