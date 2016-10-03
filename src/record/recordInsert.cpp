@@ -21,10 +21,9 @@ template<class T>
 void recordInsert(vector<T> &tData, string strfilename) {
 	char *filename = new char [strfilename.length() + 1];
 	std::strcpy (filename, strfilename.c_str());
+	cout << "filename : " << filename << endl;
 	ifstream ifs (filename);
-
-	int n;
-	ifs >> n;
+	
 	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
 
 	DelimFieldBuffer buffer ('|', MEM_MAX_BUF);
@@ -36,7 +35,7 @@ void recordInsert(vector<T> &tData, string strfilename) {
 
 
 	// Write test
-	tFile.Create (filename, ios::out | ios::trunc);
+	tFile.Open (filename, ios::out);
 	bool overlapFlag = false;
 
 	if (overlapCheck(tData, newTemp)) {
@@ -44,7 +43,9 @@ void recordInsert(vector<T> &tData, string strfilename) {
 		cout << "It is overlapped!" << endl;
 	}
 	else {
+		/*
 		bool errorFlag = false;
+		cout << "n : " << n << endl;
 		for (int i = 0; i < n; i++) {
 			T t;
 			ifs >> t;
@@ -54,14 +55,22 @@ void recordInsert(vector<T> &tData, string strfilename) {
 				cout << "Insert Error!" << endl;
 				errorFlag = true;
 			}
-		}
-		if (!errorFlag) {
-			int recAddr;
-			if((recAddr = tFile.Write(newTemp)) == -1) { cout << "Insert Error!" << endl; }
 			else {
-				insertToEnv(tData, newTemp);
+				cout << "hello" << endl;
 			}
-		}	
+		}*/
+		if (tFile.Append(newTemp) == -1) {
+			cout << "Append fail!" << endl;
+		}
+		else {
+//			int recAddr;
+//			if((recAddr = tFile.Write(newTemp)) == -1) { cout << "Insert Error!" << endl; }
+//			else {
+				insertToEnv(tData, newTemp);
+				cout << "Insert Success!" << endl;
+//				n++;
+//			}
+		}
 	}
 	tFile.Close ();
 
@@ -116,11 +125,14 @@ void recordInsertMain(Environment &env) {
 	int menuNum;
 	cin >> menuNum;
 
-	string filename = "../resources/fileOf";
+	string filename = "../built/fileOf";
 	switch (menuNum) {
 		case 1:
 			filename = filename + "Member.dat";
+			cout << "count : " << env.memberCount << endl;
 			recordInsert(env.memberData, filename);
+			cout << "count : " << env.memberCount << endl;
+
 			break;
 		case 2:
 			filename = filename + "Stock.dat";

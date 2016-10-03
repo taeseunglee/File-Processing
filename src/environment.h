@@ -11,6 +11,10 @@ typedef struct Environment {
 	vector <Member> memberData;
 	vector <Stock>	stockData;
 	vector <Purchase> purchaseData;
+
+	int memberCount;
+	int stockCount;
+	int purchaseCount;
 } Environment;
 
 void setEnvironment(Environment &env) {
@@ -31,6 +35,7 @@ void setEnvironment(Environment &env) {
 
 	ifs.open("../resources/listOfStock.txt");
 	ifs >> count;
+	env.stockCount = count;
 	getline(ifs, temp);
 	Stock stkTemp;
 	for (int i = 0; i < count; i++) {
@@ -42,6 +47,7 @@ void setEnvironment(Environment &env) {
 	
 	ifs.open("../resources/listOfPurchase.txt");
 	ifs >> count;
+	env.purchaseCount = count;
 	getline(ifs, temp);
 	Purchase purTemp;
 	for (int i = 0; i < count; i++) {
@@ -113,6 +119,14 @@ void findFromEnv (const vector<Purchase>& purchaseData, string id, bool isMember
 	}
 	if (it != purchaseData.end()) { cout << "Element found in purchaseData" << *it << endl; }
 	else { cout << "Element not found in purchaseData" << endl; }
+}
+
+void modifyCount (Environment& env, int flag, int count) {
+	switch (flag) {
+		case 1: env.memberCount += count;	return;
+		case 2: env.stockCount += count;	return;
+		case 3: env.purchaseCount += count; return;
+	}
 }
 
 #endif

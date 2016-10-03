@@ -8,7 +8,7 @@
 
 void stockTest (int flag = 10) {
 	ifstream ifs ("../resources/listOfStock.txt");
-	char filename[ ] = "../built/fileOfStockdat";
+	char filename[ ] = "../built/fileOfStock.dat";
 
 	if (ifs.fail()) {
 		cout << "\"listOfStock.txt\" File open Error!" << endl;

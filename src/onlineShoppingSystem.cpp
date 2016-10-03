@@ -19,10 +19,13 @@ bool ticketPurchaseSystem (Environment &env);
 
 int main() {
 	Environment env;
-
 	setEnvironment(env);
-	findFromEnv(env.memberData, "gclLvIAM2BA");
-	// TODO : 시작할 때 .txt -> .dat로 바꾸는 작업을 한다.
+
+	// make .dat from .txt
+	memberTest(-1);
+	stockTest(-1);
+	purchaseTest(-1);
+
 	while(selectMenu(env));
 
 	return 0;
