@@ -35,7 +35,7 @@ void recordSearchMain(Environment& env) {
 				findFromEnv(env.stockData, id);
 				break;
 
-		case 3: cout << "Select the type" << endl;
+		case 3: cout << "Select the ID type what you will find in." << endl;
 				cout << "1: MemberId" << endl << "2: StockId" << endl << "3: PurchaseId" << endl;
 
 				int flag;
