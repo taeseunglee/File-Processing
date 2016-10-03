@@ -80,39 +80,37 @@ void insertToEnv (vector<Purchase>& purchaseData, Purchase p) { purchaseData.pus
 
 
 // find data using id
-bool findFromEnv (const vector<Member>& memberData, string id, bool isPrint = true) {
-	std::vector<Member>::const_iterator it = memberData.begin();
+vector<Member>::iterator findFromEnv (vector<Member>& memberData, string id, bool isPrint = true) {
+	std::vector<Member>::iterator it = memberData.begin();
 	for (; it != memberData.end(); ++it) {
 		if ((*it).getId() == id) { break; }
 	}
 
 	if (it != memberData.end()) {
 		if (isPrint){ cout << "Element found in memberData" << *it << endl; }
-		return true;
 	}
 	else {
 		if (isPrint) { cout << "Element not found memberData" << endl; }
-		return false;
 	}
+	return it;
 }
 
-bool findFromEnv (const vector<Stock>& stockData, string id, bool isPrint = true) {
-	std::vector<Stock>::const_iterator it = stockData.begin();
+vector<Stock>::iterator findFromEnv (vector<Stock>& stockData, string id, bool isPrint = true) {
+	std::vector<Stock>::iterator it = stockData.begin();
 	for (; it != stockData.end(); ++it) {
 		if ((*it).getId() == id) { break; }
 	}
 
 	if (it != stockData.end()) {
 		if (isPrint) { cout << "Element found in stockData" << *it << endl; }
-		return true;
 	}
 	else { 
 		if (isPrint) {cout << "Element not found in stockData" << endl; }
-		return false;
 	}
+	return it;
 }
-bool findFromEnv (const vector<Purchase>& purchaseData, string id, int flag, bool isPrint = true) {
-	std::vector<Purchase>::const_iterator it = purchaseData.begin();
+vector<Purchase>::iterator findFromEnv (vector<Purchase>& purchaseData, string id, int flag, bool isPrint = true) {
+	std::vector<Purchase>::iterator it = purchaseData.begin();
 	switch (flag) {
 		case 1: // Member
 			for (; it != purchaseData.end(); ++it) {
@@ -133,12 +131,11 @@ bool findFromEnv (const vector<Purchase>& purchaseData, string id, int flag, boo
 
 	if (it != purchaseData.end()) { 
 		if (isPrint) { cout << "Element found in purchaseData" << *it << endl; }
-		return true;
 	}
 	else {
 		if (isPrint) {cout << "Element not found in purchaseData" << endl; }
-		return false;
 	}
+	return it;
 }
 
 #endif
