@@ -18,7 +18,7 @@ int main() {
 #endif
 
 template<class T>
-void recordInsert(vector<T> &tData, string strfilename) {
+void recordInsert(const Environment env, vector<T> &tData, string strfilename) {
 	char *filename = new char [strfilename.length() + 1];
 	std::strcpy (filename, strfilename.c_str());
 	ifstream ifs (filename);
@@ -31,7 +31,9 @@ void recordInsert(vector<T> &tData, string strfilename) {
 	T newTemp;
 	getNewClass(newTemp);
 
-
+	if (!associationCheck(env, newTemp)) {
+		cout << "You cannot Insert this information since informations are not matching." << endl;
+	}
 
 	// Write test
 	tFile.Open (filename, ios::out);
@@ -107,18 +109,30 @@ void recordInsertMain(Environment &env) {
 	switch (menuNum) {
 		case 1:
 			filename = filename + "Member.dat";
-			recordInsert(env.memberData, filename);
+			recordInsert(env, env.memberData, filename);
 			break;
 		case 2:
 			filename = filename + "Stock.dat";
-			recordInsert(env.stockData, filename);
+			recordInsert(env, env.stockData, filename);
 			break;
 		case 3: 
 			filename = filename + "Purchase.dat";
-			recordInsert(env.purchaseData, filename);
+			recordInsert(env, env.purchaseData, filename);
 			break;
 		case 4: break;
 	}
+}
+
+bool associationCheck(const Environment env, Member m)	{ return true; }
+bool associationCheck(const Environment env, Stock s)	{ return true; }
+bool associationCheck(const Environment env, Purchase p) {
+	// fail to find p.memberId
+	if (find(env.purchaseData, p.memberId, 1) == env.purchaseData.end()) { return false; }
+
+	// fail to find p.stockId
+	if (find(env.purchaseData, p.stockId, 1) == env.purchaseData.end()) { return false; }
+
+	return true;
 }
 
 
