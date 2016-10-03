@@ -18,7 +18,7 @@ int main() {
 #endif
 
 template<class T>
-void recordInsert(const Environment env, vector<T> &tData, string strfilename) {
+void recordInsert(Environment env, vector<T> &tData, string strfilename) {
 	char *filename = new char [strfilename.length() + 1];
 	std::strcpy (filename, strfilename.c_str());
 	ifstream ifs (filename);
@@ -123,14 +123,14 @@ void recordInsertMain(Environment &env) {
 	}
 }
 
-bool associationCheck(const Environment env, Member m)	{ return true; }
-bool associationCheck(const Environment env, Stock s)	{ return true; }
-bool associationCheck(const Environment env, Purchase p) {
+bool associationCheck(Environment env, Member m)	{ return true; }
+bool associationCheck(Environment env, Stock s)	{ return true; }
+bool associationCheck(Environment env, Purchase p) {
 	// fail to find p.memberId
-	if (find(env.purchaseData, p.memberId, 1) == env.purchaseData.end()) { return false; }
+	if (findFromEnv(env.purchaseData, p.getMemberId(), 1) == env.purchaseData.end()) { return false; }
 
 	// fail to find p.stockId
-	if (find(env.purchaseData, p.stockId, 1) == env.purchaseData.end()) { return false; }
+	if (findFromEnv(env.purchaseData, p.getStockId(), 2) == env.purchaseData.end()) { return false; }
 
 	return true;
 }
