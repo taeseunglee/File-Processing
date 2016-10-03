@@ -26,7 +26,7 @@ string*  generateRandomMemberId (int num) {
 		char* genStr = new char[lenStr + 1];
 
 		for (int j = 0; j < lenStr; ++j) {
-			genStr[j] = alphaNum[rand() % lenAlphaNum];
+			genStr[j] = alphaNum[rand() % (lenAlphaNum-1)];
 		}
 		genStr[lenStr] = '\0';
 
