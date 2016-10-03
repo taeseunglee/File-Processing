@@ -21,7 +21,6 @@ template<class T>
 void recordInsert(vector<T> &tData, string strfilename) {
 	char *filename = new char [strfilename.length() + 1];
 	std::strcpy (filename, strfilename.c_str());
-	cout << "filename : " << filename << endl;
 	ifstream ifs (filename);
 	
 	ifs.ignore (numeric_limits<streamsize>::max(), '\n');

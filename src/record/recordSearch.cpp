@@ -4,11 +4,13 @@
 #include "../classes/class_purchase.h"
 #include "../classes/class_stock.h"
 
+#include "../environment.h"
 #include "../../include/packing/recfile.h"
 #include <fstream>
+#include <cstring>
 #include <vector>
 
-void recordSearchMain() {
+void recordSearchMain(Environment& env) {
 	cout << "=================================================" << endl;
 	cout << "\t\tSelect the memu." << endl;
 	cout << "1: Search Member" << endl;
@@ -20,26 +22,35 @@ void recordSearchMain() {
 
 	int menuNum;
 	cin >> menuNum;
+	string id;
 
 	switch (menuNum) {
-		case 1: recordSearchMember(); break;
-		case 2: recordSearchStock(); break;
-		case 3: recordSearchPurchase(); break;
+		case 1: cout << "Input a Id what you search" << endl << ">>";
+				cin >> id;
+				findFromEnv(env.memberData, id);
+				break;
+
+		case 2: cout << "Input a Id what you search" << endl << ">>";
+				cin >> id;
+				findFromEnv(env.stockData, id);
+				break;
+
+		case 3: cout << "Select the type" << endl;
+				cout << "1: MemberId" << endl << "2: StockId" << endl << "3: PurchaseId" << endl;
+
+				int flag;
+				cin >> flag;
+				if (!(flag == 1 || flag == 2 || flag == 3)) { 
+					cout << "You must enter the number 1, 2 or 3" << endl; 
+					break;
+				}
+
+				cout << "Enter a Id what you search" << endl << ">>";
+				cin >> id;
+				findFromEnv(env.purchaseData, id, flag);
+				break;
 		case 4: break;
 	}
-}
-
-void recordSearchMember() {
-
-}
-
-void recordSearchStock() {
-
-}
-
-void recordSearchPurchase() {
-
-
 }
 
 #ifdef test_recordSearch
