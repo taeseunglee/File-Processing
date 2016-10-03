@@ -10,10 +10,14 @@ void purchaseTest(int flag = 10) {
 	ifstream ifs ("../resources/listOfPurchase.txt");
 	char filename[ ] = "../built/fileOfPurchase.dat";
 
-	int n = 0;
-	if (flag != 10) { ifs >> n; }
-	else			{ n = 10; }
 
+	if (ifs.fail()) {
+		cout << "\"listOfPurchase.txt\" File open Error!" <<endl;
+		exit(1);
+	}
+	
+	int n = 0;
+	ifs >> n;
 	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
 
 	DelimFieldBuffer buffer ('|', PUR_MAX_BUF);
@@ -27,12 +31,12 @@ void purchaseTest(int flag = 10) {
 
 		int recAddr;
 		if ((recAddr = purchaseFile.Write(m)) == -1) { cout << "Write Error!" << endl; }
-		else if (flag == 10) { cout << "Write at " << recAddr << endl; }
+		else if (i < flag) { cout << "Write at " << recAddr << endl; }
 	}
 	purchaseFile.Close ();
 
 
-	if (flag == 10) {
+	if (!(flag < 0)) {
 		// Read Test
 		purchaseFile.Open (filename, ios::in);
 		for (int i = 0; i < n; i++) {
