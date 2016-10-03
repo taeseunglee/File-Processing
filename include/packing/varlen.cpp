@@ -62,14 +62,14 @@ int VariableLengthBuffer :: Delete(ostream& stream) {
 	stream . write ((char *)&bufferSize, sizeof(bufferSize));
 
 	if (!stream) return -1;
-	stream . write (Buffer, BufferSize);
+	Buffer[0] = '*'; Buffer[1] = '|';
+	stream . write (Buffer, 2);
 	if (! stream . good ()) return -1;
 
 	return recaddr;
 }
 
 int VariableLengthBuffer::DDelete (ostream& File, int recaddr) {
-
 
 	return 0;
 }
