@@ -43,33 +43,12 @@ void recordInsert(vector<T> &tData, string strfilename) {
 		cout << "It is overlapped!" << endl;
 	}
 	else {
-		/*
-		bool errorFlag = false;
-		cout << "n : " << n << endl;
-		for (int i = 0; i < n; i++) {
-			T t;
-			ifs >> t;
-		
-			int recAddr;
-			if ((recAddr = tFile.Write(t)) == -1) {
-				cout << "Insert Error!" << endl;
-				errorFlag = true;
-			}
-			else {
-				cout << "hello" << endl;
-			}
-		}*/
 		if (tFile.Append(newTemp) == -1) {
 			cout << "Append fail!" << endl;
 		}
 		else {
-//			int recAddr;
-//			if((recAddr = tFile.Write(newTemp)) == -1) { cout << "Insert Error!" << endl; }
-//			else {
-				insertToEnv(tData, newTemp);
-				cout << "Insert Success!" << endl;
-//				n++;
-//			}
+			insertToEnv(tData, newTemp);
+			cout << "Insert Success!" << endl;
 		}
 	}
 	tFile.Close ();
@@ -129,10 +108,7 @@ void recordInsertMain(Environment &env) {
 	switch (menuNum) {
 		case 1:
 			filename = filename + "Member.dat";
-			cout << "count : " << env.memberCount << endl;
 			recordInsert(env.memberData, filename);
-			cout << "count : " << env.memberCount << endl;
-
 			break;
 		case 2:
 			filename = filename + "Stock.dat";
