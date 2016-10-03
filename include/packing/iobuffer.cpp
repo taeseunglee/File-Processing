@@ -58,6 +58,12 @@ int IOBuffer::DWrite (ostream & stream, int recref) const
 	return Write (stream);
 }
 
+int IOBuffer::DDelete(ostream& stream, int recref) {
+	stream.seekp(recref, ios_base::beg);
+	if ((int)stream . tellp () != recref) return -1;
+	return Delete (stream);
+}
+
 static const char * headerStr = "IOBuffer";
 //static const int headerSize = strlen (headerStr);
 static const int headerSize = 8;

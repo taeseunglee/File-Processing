@@ -26,6 +26,10 @@ class VariableLengthBuffer: public IOBuffer
 	void Print (ostream &) const;
 	int SizeOfBuffer () const; // return current size of buffer
  	int Init ();
+
+	int Update ();
+	int Delete (ostream& File);
+	int DDelete (ostream& File, int recref);
  protected:
 };
 

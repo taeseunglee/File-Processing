@@ -51,6 +51,30 @@ int VariableLengthBuffer :: Write (ostream & stream) const
 	return recaddr;
 }
 
+int VariableLengthBuffer :: Update() {
+	return 0;
+}
+
+int VariableLengthBuffer :: Delete(ostream& stream) {
+	int recaddr = (int)stream . tellp ();
+	unsigned short bufferSize;
+	bufferSize = BufferSize;
+	stream . write ((char *)&bufferSize, sizeof(bufferSize));
+
+	if (!stream) return -1;
+	stream . write (Buffer, BufferSize);
+	if (! stream . good ()) return -1;
+
+	return recaddr;
+}
+
+int VariableLengthBuffer::DDelete (ostream& File, int recaddr) {
+
+
+	return 0;
+}
+
+
 const char * headerStr = "Variable";
 //const int headerSize = strlen (headerStr);
 const int headerSize = 8;

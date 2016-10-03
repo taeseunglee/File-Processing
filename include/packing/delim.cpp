@@ -92,6 +92,7 @@ void DelimFieldBuffer :: Print (ostream & stream) const
 	stream << " Delimeter '"<<Delim<<"'"<<endl;
 }
 
+
 // Protected members
 
 int DelimFieldBuffer :: Init (char delim)
@@ -108,6 +109,16 @@ void DelimFieldBuffer :: SetDefaultDelim (char delim)
 {
 	DefaultDelim = delim;
 }
+
+
+int DelimFieldBuffer::Delete (ostream& File) {
+	return 0;
+}
+
+int DelimFieldBuffer::DDelete (ostream& File, int recref) {
+	return 0;
+}
+
 
 // initialize static protected element
 
