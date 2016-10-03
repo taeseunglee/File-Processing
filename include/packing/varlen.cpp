@@ -60,7 +60,8 @@ int VariableLengthBuffer :: Update() {
 	return 0;
 }
 
-int VariableLengthBuffer :: Delete(ostream& stream) {
+int VariableLengthBuffer :: Delete(ostream& stream) const
+{
 	int recaddr = (int)stream . tellp ();
 	unsigned short bufferSize;
 	bufferSize = BufferSize;

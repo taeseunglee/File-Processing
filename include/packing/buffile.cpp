@@ -88,8 +88,9 @@ int BufferFile::Append ()
 int BufferFile::Update () { return Append(); }
 
 int BufferFile::Delete (int recaddr) {
-	if (recaddr == -1)
-		return Buffer . Delete (File);
+	if (recaddr == -1) {
+		return Buffer.Delete (File);
+	}
 	else
 		return Buffer . DDelete (File, recaddr);
 }

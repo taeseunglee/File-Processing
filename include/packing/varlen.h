@@ -28,7 +28,7 @@ class VariableLengthBuffer: public IOBuffer
  	int Init ();
 
 	int Update ();
-	int Delete (ostream& File);
+	int Delete (ostream& ) const;
 	int DDelete (ostream& File, int recref);
  protected:
 };
