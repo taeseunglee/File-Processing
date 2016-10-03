@@ -12,6 +12,7 @@
 #include "environment.h"
 
 #include "./record/recordInsert.cpp"
+#include "./record/recordSearch.cpp"
 
 bool selectMenu (Environment &env);
 bool ticketPurchaseSystem (Environment &env);
@@ -82,7 +83,7 @@ bool ticketPurchaseSystem (Environment &env) {
 
 	bool result = true;
 	switch (menuNum) {
-		case 1: break;
+		case 1: recordSearchMain(env); break;
 		case 2: recordInsertMain(env); break;
 		case 3: break;
 		case 4: break;

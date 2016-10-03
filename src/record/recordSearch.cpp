@@ -25,12 +25,12 @@ void recordSearchMain(Environment& env) {
 	string id;
 
 	switch (menuNum) {
-		case 1: cout << "Input a Id what you search" << endl << ">>";
+		case 1: cout << "Input a Id what you search" << endl << ">> ";
 				cin >> id;
 				findFromEnv(env.memberData, id);
 				break;
 
-		case 2: cout << "Input a Id what you search" << endl << ">>";
+		case 2: cout << "Input a Id what you search" << endl << ">> ";
 				cin >> id;
 				findFromEnv(env.stockData, id);
 				break;
@@ -45,7 +45,7 @@ void recordSearchMain(Environment& env) {
 					break;
 				}
 
-				cout << "Enter a Id what you search" << endl << ">>";
+				cout << "Enter a Id what you search" << endl << ">> ";
 				cin >> id;
 				findFromEnv(env.purchaseData, id, flag);
 				break;

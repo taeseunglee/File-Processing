@@ -99,18 +99,26 @@ void findFromEnv (const vector<Stock>& stockData, string id) {
 	if (it != stockData.end()) { cout << "Element found in stockData" << *it << endl; }
 	else { cout << "Element not found in stockData" << endl; }
 }
-void findFromEnv (const vector<Purchase>& purchaseData, string id, bool isMember) {
+void findFromEnv (const vector<Purchase>& purchaseData, string id, int flag) {
 	std::vector<Purchase>::const_iterator it = purchaseData.begin();
-	if (isMember) {
-		for (; it != purchaseData.end(); ++it) {
-			if ((*it).getMemberId() == id) { break; }
-		}
+	switch (flag) {
+		case 1: // Member
+			for (; it != purchaseData.end(); ++it) {
+				if ((*it).getMemberId() == id) { break; }
+			}
+			break;
+		case 2: // Stock
+			for (; it != purchaseData.end(); ++it) {
+				if ((*it).getStockId() == id) { break; }
+			}
+			break;
+		case 3: // Purchase
+			for (; it != purchaseData.end(); ++it) {
+				if ((*it).getPurchaseId() == id) { break; }
+			}
+			break;
 	}
-	else {
-		for (; it != purchaseData.end(); ++it) {
-			if ((*it).getStockId() == id) { break; }
-		}
-	}
+
 	if (it != purchaseData.end()) { cout << "Element found in purchaseData" << *it << endl; }
 	else { cout << "Element not found in purchaseData" << endl; }
 }
