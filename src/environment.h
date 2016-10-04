@@ -4,8 +4,10 @@
 #include "./classes/class_member.h"
 #include "./classes/class_stock.h"
 #include "./classes/class_purchase.h"
-
 #include <vector>
+
+// TODO : RECADDR 도 같이 mapping 하는 것으로 바꿔야 Delete할 수 있다. 왜냐하면 delete 할 위치를
+// 알아야하기 때문에 이것은 프로젝트 2에서 하는 것으로... delete는 실패.
 
 typedef struct Environment {
 	vector <Member> memberData;
