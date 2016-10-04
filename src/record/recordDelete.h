@@ -23,7 +23,7 @@ void recordDeleteDat(T t, string strfilename) {
 	tFile.Open (filename, ios::in | ios::out);
 
 	// TODO : Delet(t, recaddr) 형태로 들어가야함.
-	if (tFile.Delete(t) == -1) {
+	if (tFile.Delete(tFile.Read(t)) == -1) {
 		cout << "Delete fail!" << endl;
 	}
 	else {

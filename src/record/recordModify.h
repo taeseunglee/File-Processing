@@ -11,8 +11,8 @@
 #include <vector>
 #include <cstring>
 
-#include "./recordInsert.cpp"
-#include "./recordDelete.cpp"
+#include "./recordInsert.h"
+#include "./recordDelete.h"
 
 template <class T>
 void recordUpdate(T oldT, T newT, string strfilename) {
@@ -27,7 +27,7 @@ void recordUpdate(T oldT, T newT, string strfilename) {
 
 	tFile.Open (filename, ios::out);
 	
-	if (tFile.Update(oldT, newT) == -1) {
+	if (tFile.Update(tFile.Read(oldT), newT) == -1) {
 		cout << "Update fail!" << endl;
 	}
 	else {
