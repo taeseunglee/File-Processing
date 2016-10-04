@@ -111,15 +111,6 @@ void DelimFieldBuffer :: SetDefaultDelim (char delim)
 }
 
 
-int DelimFieldBuffer::Delete (ostream& File) {
-	return 0;
-}
-
-int DelimFieldBuffer::DDelete (ostream& File, int recref) {
-	return 0;
-}
-
-
 // initialize static protected element
 
 char DelimFieldBuffer :: DefaultDelim = 0;

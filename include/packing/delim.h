@@ -26,8 +26,6 @@ class DelimFieldBuffer: public VariableLengthBuffer
 	void Print (ostream &) const;
  	int Init (char delim = 0);
 	static void SetDefaultDelim (char delim);
-	int Delete (ostream& File);
-	int DDelete (ostream& File, int recref);
 
 protected:
 	char Delim;

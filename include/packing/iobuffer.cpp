@@ -58,7 +58,7 @@ int IOBuffer::DWrite (ostream & stream, int recref) const
 	return Write (stream);
 }
 
-int IOBuffer::DDelete(ostream& stream, int recref) {
+int IOBuffer::DDelete(iostream& stream, int recref) {
 	stream.seekp(recref, ios_base::beg);
 	if ((int)stream . tellp () != recref) return -1;
 	return Delete (stream);
