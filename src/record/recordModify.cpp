@@ -9,6 +9,35 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <cstring>
+
+#include "./recordInsert.cpp"
+#include "./recordDelete.cpp"
+
+template <class T>
+void recordUpdate(T oldT, T newT, string strfilename) {
+	char *filename = new char [strfilename.length() + 1];
+	std::strcpy (filename, strfilename.c_str());
+	ifstream ifs (filename);
+	
+	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
+
+	DelimFieldBuffer buffer ('|', MEM_MAX_BUF);
+	RecordFile <T> tFile (buffer);
+
+	tFile.Open (filename, ios::out);
+	
+	if (tFile.Update(oldT, newT) == -1) {
+		cout << "Update fail!" << endl;
+	}
+	else {
+		cout << "Update Success!" << endl;
+	}
+	tFile.Close ();
+
+	delete [] filename;
+
+}
 
 
 void recordModifyMember(vector<Member>& memberData) {
@@ -19,12 +48,14 @@ void recordModifyMember(vector<Member>& memberData) {
 	vector<Member>::iterator it = findFromEnv(memberData, id);
 	if (it == memberData.end()) { return ; }
 
+	Member findMemTemp(*it);
+
 	// modification
 	cout << "========= modification starting ============" << endl;
 	
 	string temp;
 	cout << "Input Name." << endl;
-	cin >> temp;
+	getline(cin, temp); getline(cin, temp);
 	(*it).setName(temp);
 
 	cout << "Input Phone Number." << endl;
@@ -44,6 +75,11 @@ void recordModifyMember(vector<Member>& memberData) {
 	(*it).setBirthday(temp);
 
 	cout << "=========== modification end ==============" << endl;
+
+	cout << "Updating.." << endl;
+
+	// Updating(Appending)
+	recordUpdate(findMemTemp, *it, "../built/fileOfMember.dat");
 }
 
 void recordModifyStock(vector<Stock>& stockData) {
@@ -54,6 +90,7 @@ void recordModifyStock(vector<Stock>& stockData) {
 	vector<Stock>::iterator it = findFromEnv(stockData, id);
 	if (it == stockData.end()) { return ; }
 
+	Stock findStkTemp(*it); // current object copying
 	// modification
 	cout << "========= modification starting ============" << endl;
 	
@@ -83,6 +120,11 @@ void recordModifyStock(vector<Stock>& stockData) {
 	(*it).setSize(temp);
 
 	cout << "=========== modification end ==============" << endl;
+
+	cout << "Updating.." << endl;
+
+	// Updating(Appending)
+	recordUpdate(findStkTemp, *it, "../built/fileOfStock.dat");
 }
 
 void recordModifyPurchase(vector<Purchase>& purchaseData) {
@@ -94,6 +136,7 @@ void recordModifyPurchase(vector<Purchase>& purchaseData) {
 	vector<Purchase>::iterator it = findFromEnv(purchaseData, id, 3);
 	if (it == purchaseData.end()) { return ; }
 
+	Purchase findPurTemp(*it); // current object copying
 
 	// modification
 	string temp;
@@ -104,8 +147,12 @@ void recordModifyPurchase(vector<Purchase>& purchaseData) {
 	(*it).setQuantity(temp);
 
 	cout << "=========== modification end ==============" << endl;
-}
 
+	cout << "Updating.." << endl;
+
+	// Updating(Appending)
+	recordUpdate(findPurTemp, *it, "../built/fileOfPurchase.dat");
+}
 void recordModifyMain(Environment& env) {
 	cout << "=================================================" << endl;
 	cout << "\t\tSelect the memu." << endl;
