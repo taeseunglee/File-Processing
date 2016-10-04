@@ -40,9 +40,9 @@ void purchaseTest(int flag = 10) {
 		// Read Test
 		purchaseFile.Open (filename, ios::in);
 		for (int i = 0; i < n; i++) {
-			Purchase m;
-			purchaseFile.Read(m);
-			cout << m;
+			Purchase p;
+			purchaseFile.Read(p);
+			cout << p << endl;
 		}
 		purchaseFile.Close();
 	}

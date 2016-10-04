@@ -42,7 +42,7 @@ void memberTest (int flag = 10) {
 		for (int i = 0; i < n; i++) {
 			Member m;
 			memberFile.Read(m);
-			cout << m;
+			cout << m << endl;
 		}
 		memberFile.Close();
 	}

@@ -38,9 +38,9 @@ void stockTest (int flag = 10) {
 		// Read Test
 		stockFile.Open (filename, ios::in);
 		for (int i = 0; i < n; i++) {
-			Stock m;
-			stockFile.Read(m);
-			cout << m;
+			Stock s;
+			stockFile.Read(s);
+			cout << s << endl;
 		}
 		stockFile.Close();
 	}
