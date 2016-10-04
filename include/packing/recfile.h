@@ -15,6 +15,7 @@ class RecordFile: public BufferFile
 	int Write (const RecType & record, int recaddr = -1);
 	int Append (const RecType & record, int recaddr = -1);
 	int Delete (const RecType& record, int recaddr = -1);
+	int Update (const RecType& recordOld, const RecType& recordNew, int recaddr = -1);
 	RecordFile (IOBuffer & buffer): BufferFile (buffer) {}
 };
 
@@ -54,6 +55,21 @@ int RecordFile<RecType>::Delete (const RecType& record, int recaddr) {
 	result = record . Pack (Buffer);
 	if (!result) return -1;
 	return BufferFile::Delete(recaddr);
+}
+
+template <class RecType>
+// record1 : old Record, record2 : new Record
+int RecordFile<RecType>::Update (const RecType& recordOld, const RecType& recordNew, int recaddr) {
+	int result;
+
+	result = recordOld.Pack(Buffer);
+	if (!result) return -1;
+	result = BufferFile::Delete(recaddr);
+	if (result == -1) return -1;
+	
+	result = recordNew.Pack(Buffer);
+	if (!result) return -1;
+	return BufferFile::Append();
 }
 
 #endif
