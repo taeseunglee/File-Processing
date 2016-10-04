@@ -15,16 +15,14 @@ template<class T>
 void recordDeleteDat(T t, string strfilename) {
 	char *filename = new char [strfilename.length() + 1];
 	std::strcpy (filename, strfilename.c_str());
-	ifstream ifs (filename);
-	
-	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
 
 	DelimFieldBuffer buffer ('|', MEM_MAX_BUF);
 	RecordFile <T> tFile (buffer);
 
 
-	tFile.Open (filename, ios::out);
-	
+	tFile.Open (filename, ios::in | ios::out);
+
+	// TODO : Delet(t, recaddr) 형태로 들어가야함.
 	if (tFile.Delete(t) == -1) {
 		cout << "Delete fail!" << endl;
 	}
