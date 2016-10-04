@@ -27,7 +27,7 @@ int VariableLengthBuffer :: Read (istream & stream)
 	bool skip = false;
 	int recaddr;
 	
-	while (!skip) {
+	do {
 		if (stream.eof()) return -1;
 		recaddr = (int)stream . tellg ();
 		Clear ();
@@ -40,7 +40,7 @@ int VariableLengthBuffer :: Read (istream & stream)
 		if (! stream . good ()){stream.clear(); return -1;}
 
 		if (Buffer[2] != '*') { skip = true; }
-	}
+	} while (!skip);
 	return recaddr;
 }
 

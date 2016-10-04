@@ -11,10 +11,10 @@
 #include "./packingTest/stockTest.cpp"
 #include "environment.h"
 
-#include "./record/recordInsert.cpp"
-#include "./record/recordSearch.cpp"
-#include "./record/recordDelete.cpp"
-#include "./record/recordModify.cpp"
+#include "./record/recordInsert.h"
+#include "./record/recordSearch.h"
+#include "./record/recordDelete.h"
+#include "./record/recordModify.h"
 
 bool selectMenu (Environment &env);
 bool ticketPurchaseSystem (Environment &env);
@@ -65,7 +65,6 @@ bool selectMenu (Environment &env) {
 		case 8: default: return result = false;
 	}
 
-
 	return result;
 }
 
@@ -91,6 +90,7 @@ bool ticketPurchaseSystem (Environment &env) {
 		case 4: recordModifyMain(env); break;
 		case 5: default: return result = false;
 	}
+
 
 	return result;
 }
