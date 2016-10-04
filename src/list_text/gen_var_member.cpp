@@ -22,11 +22,11 @@ string*  generateRandomMemberId (int num) {
 
 	for (int i = 0; i < num; i++) {
 		const int lenStr = rand() % 9 + 5,		// the max length of ID
-			  lenAlphaNum = sizeof(alphaNum);
+			  lenAlphaNum = sizeof(alphaNum)-1;
 		char* genStr = new char[lenStr + 1];
 
 		for (int j = 0; j < lenStr; ++j) {
-			genStr[j] = alphaNum[rand() % (lenAlphaNum-1)];
+			genStr[j] = alphaNum[rand() % lenAlphaNum];
 		}
 		genStr[lenStr] = '\0';
 

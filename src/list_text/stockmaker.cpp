@@ -12,7 +12,7 @@
 using namespace std;
 
 #define MAX_GEN		1400
-#define MAX_CLOTH	212
+#define MAX_CLOTH 36
 #define MAX_TEXTILE 139
 #define MAX_WASHING 7
 
@@ -57,7 +57,6 @@ string* makeListStock(){
 
 		stockId[i] = string(strId);
 
-		// price
 		if(price >= 1000){
 			ss << price/1000;
 			output = output + ss.str() + ",";

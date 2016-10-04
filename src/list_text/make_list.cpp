@@ -76,7 +76,6 @@ void makeListPurchase(string* memberIdList,string* stockIdList) {
 	FILE* fp = fopen("listOfPurchase.txt", "w");
 
 	fprintf(fp, "%d\n", NUM_OF_PURCHASES);
-
 	srand(time(NULL));
 	for (int i = 0; i < NUM_OF_PURCHASES; i++) {
 		long long int purchaseId = rand() % 100000000;
@@ -90,5 +89,4 @@ void makeListPurchase(string* memberIdList,string* stockIdList) {
 	}
 
 	fclose(fp);
-
 }
