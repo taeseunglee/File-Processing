@@ -24,8 +24,10 @@ int VariableLengthBuffer :: Read (istream & stream)
 // write the number of bytes in the buffer field definitions
 // the record length is represented by an unsigned short value
 {
+	bool skip = false;
 	int recaddr;
-	do {
+	
+	while (!skip) {
 		if (stream.eof()) return -1;
 		recaddr = (int)stream . tellg ();
 		Clear ();
@@ -37,8 +39,8 @@ int VariableLengthBuffer :: Read (istream & stream)
 		stream . read (Buffer, BufferSize);
 		if (! stream . good ()){stream.clear(); return -1;}
 
-		if (Buffer[0] == '*' && Buffer[1] == '|') stream.seekg(recaddr + BufferSize + 2, ios::beg); // +2 means : buffer size of record length
-	} while (Buffer[0] == '*' && Buffer[1] == '|');
+		if (Buffer[2] != '*') { skip = true; }
+	}
 	return recaddr;
 }
 

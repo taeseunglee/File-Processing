@@ -12,7 +12,6 @@
 #define FALSE (0)
 #define TRUE (1)
 #endif
-
 class BufferFile 
 // Class to represent buffered file operations
 // 	Used in conjunction with the IOBuffer classes 
@@ -43,8 +42,9 @@ class BufferFile
 	int Append (); // write the current buffer at the end of file
 
 	// Added By me
-	int Update ();
-	int Delete (int recaddr = -1);
+	int Delete (int);
+	template <class T>
+	int Update (int recaddrOld, const T& newRecord);
 
 	// Access to IOBuffer
 	IOBuffer & GetBuffer ();

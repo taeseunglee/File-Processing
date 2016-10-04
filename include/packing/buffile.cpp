@@ -85,14 +85,22 @@ int BufferFile::Append ()
 	return Buffer . Write (File);
 }
 
-int BufferFile::Update () { return Append(); }
-
 int BufferFile::Delete (int recaddr) {
-	if (recaddr == -1) {
-		return Buffer.Delete (File);
-	}
-	else
-		return Buffer . DDelete (File, recaddr);
+	File.seekp(recaddr + 2, ios::beg);
+	Buffer.Pack("*");
+	return Buffer.Write (File);
+}
+
+template <class T>
+int BufferFile::Update (int recaddrOld, const T& newRecord) {
+	// Delete
+	if (BufferFile::Delete (recaddrOld) == -1) { return -1; }
+	
+	// Append
+	int result = newRecord . Pack (Buffer);
+	if (!result) return -1;
+
+	return BufferFile::Append ();
 }
 
 // Access to IOBuffer
