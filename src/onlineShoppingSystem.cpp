@@ -25,9 +25,9 @@ int main() {
 	setEnvironment(env);
 
 	// make .dat from .txt
-	memberTest(-1);
-	stockTest(-1);
-	purchaseTest(-1);
+	memberTest(env, -1);
+	stockTest(env, -1);
+	purchaseTest(env, -1);
 
 	while(selectMenu(env));
 
@@ -57,9 +57,9 @@ bool selectMenu (Environment &env) {
 		case 2: showStock(); break;
 		case 3: showPurchase(); break;
 
-		case 4: memberTest(); break;
-		case 5: stockTest(); break;
-		case 6: purchaseTest(); break;
+		case 4: memberTest(env); break;
+		case 5: stockTest(env); break;
+		case 6: purchaseTest(env); break;
 
 		case 7: while(ticketPurchaseSystem(env)); break;
 		case 8: default: return result = false;
@@ -91,7 +91,5 @@ bool ticketPurchaseSystem (Environment &env) {
 		case 5: default: return result = false;
 	}
 
-
 	return result;
 }
-
