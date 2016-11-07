@@ -11,17 +11,17 @@ SHOW_PURCHASE = showPurchase
 build: $(addsuffix .o, $(TARGET))
 
 $(SHOW_MEMBER): build.class .mkdir.o
-	g++ -c $(SHOW_MEMBER).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_MEMBER).o -D test_$(SHOW_MEMBER)
-	g++ -o $(BUILT_DIR)/$(SHOW_MEMBER) $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_MEMBER).o 
+	g++ $(GPPFLAG) -c $(SHOW_MEMBER).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_MEMBER).o -D test_$(SHOW_MEMBER)
+	g++ $(GPPFLAG) -o $(BUILT_DIR)/$(SHOW_MEMBER) $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_MEMBER).o 
 
 $(SHOW_STOCK): build.class .mkdir.o
-	g++ -c $(SHOW_STOCK).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_STOCK).o -D test_$(SHOW_STOCK)
-	g++ -o $(BUILT_DIR)/$(SHOW_STOCK)  $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_STOCK).o
+	g++ $(GPPFLAG) -c $(SHOW_STOCK).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_STOCK).o -D test_$(SHOW_STOCK)
+	g++ $(GPPFLAG) -o $(BUILT_DIR)/$(SHOW_STOCK)  $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_STOCK).o
 
 
 $(SHOW_PURCHASE): build.class .mkdir.o
-	g++ -c $(SHOW_PURCHASE).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_PURCHASE).o -D test_$(SHOW_PURCHASE)
-	g++ -o $(BUILT_DIR)/$(SHOW_PURCHASE) $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_PURCHASE).o
+	g++ $(GPPFLAG) -c $(SHOW_PURCHASE).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_PURCHASE).o -D test_$(SHOW_PURCHASE)
+	g++ $(GPPFLAG) -o $(BUILT_DIR)/$(SHOW_PURCHASE) $(OBJS_DIR)/classes/*.o $(OBJS_DIR)/$(PART_NAME)/$(SHOW_PURCHASE).o
 
 
 .PHONY: build.class
