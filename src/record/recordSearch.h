@@ -7,6 +7,7 @@
 #include "../environment.h"
 #include "../../include/packing/recfile.h"
 #include <fstream>
+#include <string.h>
 #include <cstring>
 #include <vector>
 
@@ -23,19 +24,53 @@ void recordSearchMain(Environment& env) {
 	int menuNum;
 	cin >> menuNum;
 	string id;
+	bool findFlag = false;
+
+	DelimFieldBuffer buffer ('|', MEM_MAX_BUF);
+	char* filename = new char [MAX_FILENAME];
 
 	switch (menuNum) {
-		case 1: cout << "Enter Id what you search" << endl << ">> ";
+		case 1: 
+			{
+				cout << "Enter Id what you search" << endl << ">> ";
 				cin >> id;
-				findFromEnv(env.memberData, id);
-				break;
+				FINDINDATA(env.memberData, id, findFlag);
+				if (findFlag) {
+					cout << "Element found" << endl;
+					RecordFile <Member> memberFile (buffer);
+					Member m;
 
-		case 2: cout << "Enter Id what you search" << endl << ">> ";
+					strlcpy(filename, "../built/fileOfMember.dat", MAX_FILENAME - 1);
+					memberFile.Open(filename, ios::in);
+					memberFile.Read(m, env.memberData[id]);
+					cout << m << endl;
+					memberFile.Close();
+				}
+				else { cout << "Element not found" << endl; }
+			}
+			break;
+		case 2: 
+			{
+				cout << "Enter Id what you search" << endl << ">> ";
 				cin >> id;
-				findFromEnv(env.stockData, id);
-				break;
+				FINDINDATA(env.stockData, id, findFlag);
+				if (findFlag) {
+					cout << "Element found in stockData" << endl;
+					RecordFile <Stock> stockFile (buffer);
+					Stock s;
 
-		case 3: cout << "Select the ID type what you will find in." << endl;
+					strlcpy(filename, "../built/fileOfStock.dat", MAX_FILENAME - 1);
+					stockFile.Open(filename, ios::in);
+					stockFile.Read(s, env.stockData[id]);
+					cout << s << endl;
+					stockFile.Close();
+				}
+				else { cout << "Element not found" << endl; }
+			}
+			break;
+		case 3: 
+			{
+				cout << "Select the ID type what you will find in." << endl;
 				cout << "1: MemberId" << endl << "2: StockId" << endl << "3: PurchaseId" << endl;
 
 				int flag;
@@ -47,10 +82,15 @@ void recordSearchMain(Environment& env) {
 
 				cout << "Enter Id what you search" << endl << ">> ";
 				cin >> id;
-				findFromEnv(env.purchaseData, id, flag);
-				break;
+				std::vector<Purchase>::iterator it = findFromEnv(env.purchaseList, id, flag);
+
+				if (it != env.purchaseList.end()) { cout << "Element found in purchaseList" << *it << endl; }
+				else { cout << "Element not found" << endl; }
+			}
+			break;
 		case 4: break;
 	}
+	delete [] filename;
 }
 
 #ifdef test_recordSearch

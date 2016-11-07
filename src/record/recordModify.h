@@ -15,10 +15,11 @@
 #include "./recordDelete.h"
 
 template <class T>
-void recordUpdate(T oldT, T newT, string strfilename) {
+bool recordUpdate(int oldRecAddr, T newT, string strfilename) {
 	char *filename = new char [strfilename.length() + 1];
 	std::strcpy (filename, strfilename.c_str());
 	ifstream ifs (filename);
+	bool isSuccess = true;
 	
 	ifs.ignore (numeric_limits<streamsize>::max(), '\n');
 
@@ -27,8 +28,9 @@ void recordUpdate(T oldT, T newT, string strfilename) {
 
 	tFile.Open (filename, ios::out);
 	
-	if (tFile.Update(tFile.Read(oldT), newT) == -1) {
+	if (tFile.Update(oldRecAddr, newT) == -1) {
 		cout << "Update fail!" << endl;
+		isSuccess = false;
 	}
 	else {
 		cout << "Update Success!" << endl;
@@ -37,121 +39,83 @@ void recordUpdate(T oldT, T newT, string strfilename) {
 
 	delete [] filename;
 
+	return isSuccess;
 }
 
 
-void recordModifyMember(vector<Member>& memberData) {
+bool recordModifyMember(Environment& env) {
 	cout << "Enter Member ID for modification" << endl << ">> ";
 	string id;
 	cin >> id;
 
-	vector<Member>::iterator it = findFromEnv(memberData, id);
-	if (it == memberData.end()) { return ; }
+	if (env.memberData.find(id) == env.memberData.end()) { // not found
+		return false;
+	}
 
-	Member findMemTemp(*it);
+	Member memberTemp;
+	memberTemp.setId(id);
 
 	// modification
-	cout << "========= modification starting ============" << endl;
-	
-	string temp;
-	cout << "Input Name." << endl;
-	getline(cin, temp); getline(cin, temp);
-	(*it).setName(temp);
-
-	cout << "Input Phone Number." << endl;
-	cin >> temp;
-	(*it).setPhoneNumber(temp);
-
-	cout << "Input address." << endl;
-	cin >> temp;
-	(*it).setAddress(temp);
-
-	cout << "Input email" << endl;
-	cin >> temp;
-	(*it).setEmail(temp);
-
-	cout << "Input birthday." << endl;
-	cin >> temp;
-	(*it).setBirthday(temp);
-
-	cout << "=========== modification end ==============" << endl;
+	cout << "========= Insert new information ============" << endl;
+	bool isSuccess = getNewClass(env, memberTemp, true); // always true
+	cout << "========= end ===============================" << endl;
 
 	cout << "Updating.." << endl;
 
 	// Updating(Appending)
-	recordUpdate(findMemTemp, *it, "../built/fileOfMember.dat");
+	isSuccess = recordUpdate(env.memberData[id], memberTemp, "../built/fileOfMember.dat");
+
+	return isSuccess;
 }
 
-void recordModifyStock(vector<Stock>& stockData) {
+bool recordModifyStock(Environment& env) {
 	cout << "Enter Stock ID for modification" << endl << ">> ";
 	string id;
 	cin >> id;
 
-	vector<Stock>::iterator it = findFromEnv(stockData, id);
-	if (it == stockData.end()) { return ; }
+	if (env.stockData.find(id) == env.stockData.end())
+		return false;
 
-	Stock findStkTemp(*it); // current object copying
+	Stock stockTemp;
+	stockTemp.setId(id);
+
 	// modification
 	cout << "========= modification starting ============" << endl;
-	
-	string temp;
-	cout << "Input the category.(8 characters)" << endl;
-	cin >> temp;
-	(*it).setCategory(temp);
-
-	cout << "Input the material." << endl;
-	cin >> temp;
-	(*it).setMaterial(temp);
-
-	cout << "Input the price.(6 characters(Numeric). ex.35,000)" << endl;
-	cin >> temp;
-	(*it).setPrice(temp);
-
-	cout << "Input Stock.(4 characters(Numeric) ex. 96, 1400)" << endl;
-	cin >> temp;
-	(*it).setStock(temp);
-
-	cout << "Input washingInfo." << endl;
-	cin >> temp;
-	(*it).setWashingInfo(temp);
-
-	cout << "Input size (Type S, M, L or XL)" << endl;
-	cin >> temp;
-	(*it).setSize(temp);
-
+	bool isSuccess = getNewClass(env, stockTemp, true); // always true
 	cout << "=========== modification end ==============" << endl;
 
 	cout << "Updating.." << endl;
 
 	// Updating(Appending)
-	recordUpdate(findStkTemp, *it, "../built/fileOfStock.dat");
+	isSuccess = recordUpdate(env.stockData[id], stockTemp, "../built/fileOfStock.dat");
+
+	return isSuccess;
 }
 
-void recordModifyPurchase(vector<Purchase>& purchaseData) {
+bool recordModifyPurchase(Environment& env) {
 	cout << "Enter Purchase ID for modification" << endl << ">> ";
 	string id;
 	cin >> id;
 
-	// fail to find same id.
-	vector<Purchase>::iterator it = findFromEnv(purchaseData, id, 3);
-	if (it == purchaseData.end()) { return ; }
+	if (env.purchaseData.find(id) == env.purchaseData.end())
+		return false;
 
-	Purchase findPurTemp(*it); // current object copying
+	Purchase purchaseTemp;
+	purchaseTemp.setPurchaseId(id);
 
 	// modification
-	string temp;
 	cout << "========= modification starting ============" << endl;
-	
-	cout << "Input the quantity." << endl;
-	cin >> temp;
-	(*it).setQuantity(temp);
-
+	bool isSuccess = getNewClass(env, purchaseTemp, true);
 	cout << "=========== modification end ==============" << endl;
+	if (!isSuccess)
+		return false;
 
 	cout << "Updating.." << endl;
 
 	// Updating(Appending)
-	recordUpdate(findPurTemp, *it, "../built/fileOfPurchase.dat");
+	isSuccess = recordUpdate(env.purchaseData[id], purchaseTemp, "../built/fileOfPurchase.dat");
+
+	return isSuccess;
 }
 void recordModifyMain(Environment& env) {
 	cout << "=================================================" << endl;
@@ -165,12 +129,19 @@ void recordModifyMain(Environment& env) {
 
 	int menuNum;
 	cin >> menuNum;
+	bool isSuccess;
 
 	switch (menuNum) {
-		case 1: recordModifyMember(env.memberData); break;
-		case 2: recordModifyStock(env.stockData); break;
-		case 3: recordModifyPurchase(env.purchaseData); break;
+		case 1: isSuccess = recordModifyMember(env); break;
+		case 2: isSuccess = recordModifyStock(env); break;
+		case 3: isSuccess = recordModifyPurchase(env); break;
 		case 4: break;
+	}
+	if (isSuccess) {
+		cout << "Modifing data completes" << endl;
+	}
+	else {
+		cout << "Modifing data fails" << endl;
 	}
 }
 
