@@ -1,5 +1,6 @@
 BUILT_DIR = $(SRC_DIR)/built
 OBJS_DIR = $(BUILT_DIR)/objs
+GPPFLAG = -std=c++11
 
 .PHONY: clean
 clean:
@@ -7,7 +8,7 @@ clean:
 	@echo "Cleaned."
 
 $(addsuffix .o, $(TARGET)): %.o: .mkdir.o
-	g++ -c $(basename $@).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(basename $@).o
+	g++ $(GPPFLAG) -c $(basename $@).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(basename $@).o
 
 .PHONY: .mkdir.o
 .mkdir.o:

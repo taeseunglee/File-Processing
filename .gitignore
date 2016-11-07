@@ -26,3 +26,4 @@ built/
 # lib/
 *.dat
 .DS_Store
+*.swp
