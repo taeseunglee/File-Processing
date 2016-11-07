@@ -29,12 +29,12 @@ class Purchase {
 		bool operator != (const Purchase &P);
 
 		// make member functions that set member variables.
-		void setPurchaseId	(const string& purchaseID);
+		void setPurchaseId	(const string& purchaseID); // Purchase id
 		void setStockId		(const string& stockID);
 		void setMemberId	(const string& memberID);
 		void setQuantity	(const string& quantity);
 		
-		string getPurchaseId()	const { return purchaseId; };
+		string getId()			const { return purchaseId; };
 		string getStockId()		const { return stockId; };
 		string getMemberId()	const { return memberId; };
 
