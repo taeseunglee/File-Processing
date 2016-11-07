@@ -24,7 +24,7 @@ int VariableLengthBuffer :: Read (istream & stream)
 // write the number of bytes in the buffer field definitions
 // the record length is represented by an unsigned short value
 {
-	bool skip = false;
+	bool skip = true;
 	int recaddr;
 	
 	do {
@@ -39,7 +39,10 @@ int VariableLengthBuffer :: Read (istream & stream)
 		stream . read (Buffer, BufferSize);
 		if (! stream . good ()){stream.clear(); return -1;}
 
-		if (Buffer[2] != '*') { skip = true; }
+		printf("[Debug] Buffer : %s / Buffer[2] : %c\n", Buffer, Buffer[2]);
+
+		if (Buffer[2] == '*' && Buffer[3] == '|') { skip = false; }
+		else { skip = true; }
 	} while (!skip);
 	return recaddr;
 }
@@ -64,16 +67,19 @@ int VariableLengthBuffer :: Update() {
 
 int VariableLengthBuffer :: Delete(iostream& stream)
 {
+	printf("[Debug] valen.cpp / Delete\n");
 	int recaddr = (int)stream . tellg ();
 	unsigned short bufferSize;
-	stream . read ((char *)&bufferSize, sizeof(bufferSize));
+	
 	BufferSize = bufferSize;
-
+	stream . write((char *)&bufferSize, sizeof(bufferSize));
 	if (!stream) return -1;
 	Buffer[0] = '*'; Buffer[1] = '|';
+	printf("[Debug] [Buffer[0] : %c][Buffer[1] : %c][Buffer : %s][recaddr : %d]\n", Buffer[0],
+			Buffer[1], Buffer, recaddr);
 	stream . write (Buffer, 2);
 	if (! stream . good ()) return -1;
-
+	
 	return recaddr;
 }
 

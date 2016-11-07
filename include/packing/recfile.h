@@ -10,7 +10,7 @@
 
 template <class RecType>
 class RecordFile: public BufferFile
-{public:
+{	public:
 	int Read (RecType & record, int recaddr = -1);
 	int Write (const RecType & record, int recaddr = -1);
 	int Append (const RecType & record, int recaddr = -1);

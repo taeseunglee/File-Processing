@@ -85,10 +85,10 @@ int BufferFile::Append ()
 	return Buffer . Write (File);
 }
 
+// TODO : Front two bits must not be modified but they are modified.
 int BufferFile::Delete (int recaddr) {
-	File.seekp(recaddr + 2, ios::beg);
-	Buffer.Pack("*");
-	return Buffer.Write (File);
+	File.seekp(recaddr, ios::beg);
+	return Buffer.Delete (File);
 }
 
 template <class T>
