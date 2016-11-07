@@ -5,8 +5,9 @@
 #include "../../include/packing/recfile.h"
 #include <fstream>
 #include <vector>
+#include "../environment.h"
 
-void purchaseTest(int flag = 10) {
+void purchaseTest(Environment &env, int flag = 10) {
 	ifstream ifs ("../resources/listOfPurchase.txt");
 	char filename[ ] = "../built/fileOfPurchase.dat";
 
@@ -26,12 +27,19 @@ void purchaseTest(int flag = 10) {
 	// Write test
 	purchaseFile.Create (filename, ios::out | ios::trunc);
 	for (int i = 0; i < n; i++) {
-		Purchase m;
-		ifs >> m;
+		Purchase p;
+		ifs >> p;
 
 		int recAddr;
-		if ((recAddr = purchaseFile.Write(m)) == -1) { cout << "Write Error!" << endl; }
-		else if (i < flag) { cout << "Write at " << recAddr << endl; }
+		if ((recAddr = purchaseFile.Write(p)) == -1) { cout << "Write Error!" << endl; }
+		else {
+			if (i < flag) { 
+				cout << "Write at " << recAddr << endl;
+			}
+			else {
+				env.purchaseData[p.getId()] = recAddr;
+			}
+		}
 	}
 	purchaseFile.Close ();
 
@@ -50,7 +58,8 @@ void purchaseTest(int flag = 10) {
 
 #ifdef test_purchaseTest
 int main() {
-	purchaseTest();
+	Environment env;
+	purchaseTest(env);
 
 	return 0;
 }

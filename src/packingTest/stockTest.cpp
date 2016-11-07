@@ -5,8 +5,9 @@
 #include "../../include/packing/recfile.h"
 #include <fstream>
 #include <vector>
+#include "../environment.h"
 
-void stockTest (int flag = 10) {
+void stockTest (Environment &env, int flag = 10) {
 	ifstream ifs ("../resources/listOfStock.txt");
 	char filename[ ] = "../built/fileOfStock.dat";
 
@@ -25,12 +26,19 @@ void stockTest (int flag = 10) {
 	// Write test
 	stockFile.Create (filename, ios::out | ios::trunc);
 	for (int i = 0; i < n; i++) {
-		Stock m;
-		ifs >> m;
+		Stock s;
+		ifs >> s;
 
 		int recAddr;
-		if ((recAddr = stockFile.Write(m)) == -1) { cout << "Write Error!" << endl; }
-		else if (i < flag) { cout << "Write at " << recAddr << endl; }
+		if ((recAddr = stockFile.Write(s)) == -1) { cout << "Write Error!" << endl; }
+		else {
+			if (i < flag) {
+				cout << "Write at " << recAddr << endl;
+			}
+			else {
+				env.stockData[s.getId()] = recAddr;
+			}
+		}
 	}
 	stockFile.Close ();
 
@@ -48,7 +56,8 @@ void stockTest (int flag = 10) {
 
 #ifdef test_stockTest
 int main() {
-	stockTest();
+	Environment env;
+	stockTest(env);
 
 	return 0;
 }
