@@ -1,12 +1,15 @@
 SRC_DIR = ..
+
 PACKING_DIR = ../include/packing
+INDEX_DIR = ../include/index
+
 CLASS_DIR = classes
 SHOW_DIR = showClass
 TEST_DIR = packingTest
 PART_NAME = onlineShoppingSystem
 TARGET = onlineShoppingSystem
 
-build: build.packing build.class .mkdir.o
+build: build.packing build.index build.class .mkdir.o
 	g++ $(GPPFLAG) -c $(TARGET).cpp -o $(OBJS_DIR)/$(PART_NAME)/$(TARGET).o
 	g++ $(GPPFLAG) -o $(BUILT_DIR)/$(TARGET) $(OBJS_DIR)/**/*.o
 
@@ -14,6 +17,10 @@ build: build.packing build.class .mkdir.o
 .PHONY: build.packing
 build.packing:
 	make -C $(PACKING_DIR)
+
+.PHONY: build.index
+build.index:
+	make -C $(INDEX_DIR)
 
 .PHONY: build.class
 build.class:
