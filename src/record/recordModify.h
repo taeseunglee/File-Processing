@@ -43,13 +43,15 @@ bool recordUpdate(int oldRecAddr, T newT, string strfilename) {
 }
 
 
-bool recordModifyMember(Environment& env) {
-	cout << "Enter Member ID for modification" << endl << ">> ";
-	string id;
-	cin >> id;
+// If you modify information of specific member
+bool recordModifyMember(Environment& env, string id = "") {
+	if (id.empty()) {
+		cout << "Enter Member ID for modification" << endl << ">> ";
+		cin >> id;
 
-	if (env.memberData.find(id) == env.memberData.end()) { // not found
-		return false;
+		if (env.memberData.find(id) == env.memberData.end()) { // not found
+			return false;
+		}
 	}
 
 	Member memberTemp;
@@ -92,13 +94,14 @@ bool recordModifyStock(Environment& env) {
 	return isSuccess;
 }
 
-bool recordModifyPurchase(Environment& env) {
-	cout << "Enter Purchase ID for modification" << endl << ">> ";
-	string id;
-	cin >> id;
+bool recordModifyPurchase(Environment& env, string id = "") {
+	if (id.empty()) {
+		cout << "Enter Purchase ID for modification" << endl << ">> ";
+		cin >> id;
 
-	if (env.purchaseData.find(id) == env.purchaseData.end())
-		return false;
+		if (env.purchaseData.find(id) == env.purchaseData.end())
+			return false;
+	}
 
 	Purchase purchaseTemp;
 	purchaseTemp.setPurchaseId(id);

@@ -36,10 +36,10 @@ bool recordDeleteDat(int recAddr, string strfilename, T t) {
 	return isSuccess;
 }
 
-void recordDeletePurchaseMID(
-		std::map<string, int> &purchaseData,
-		vector<Purchase>& purchaseList, 
-		string mid) {
+void recordDeletePurchaseMID(Environment &env, string mid) {
+	std::map<string ,int>& purchaseData = env.purchaseData;
+	std::vector<Purchase>& purchaseList = env.purchaseList;
+
 	for (std::vector<Purchase>::iterator it = purchaseList.begin();
 			it != purchaseList.end(); ++it) {
 		if ((*it).getMemberId() == mid) {
@@ -60,10 +60,10 @@ void recordDeletePurchaseMID(
 	}
 }
 
-void recordDeletePurchaseSID(
-		std::map<string, int> &purchaseData,
-		vector<Purchase>& purchaseList,
-		string sid) {
+void recordDeletePurchaseSID(Environment& env, string sid) {
+	std::map<string ,int>& purchaseData = env.purchaseData;
+	std::vector<Purchase>& purchaseList = env.purchaseList;
+
 	for (std::vector<Purchase>::iterator it = purchaseList.begin();
 			it != purchaseList.end(); ++it) {
 		if ((*it).getStockId() == sid) {
@@ -86,12 +86,9 @@ void recordDeletePurchaseSID(
 
 }
 
-void recordDeletePurchasePID(
-		std::map<string, int>& purchaseData,
-		vector<Purchase>& purchaseList,
-		vector<Purchase>::iterator it) {
-	purchaseData.erase((*it).getId());
-	purchaseList.erase(it);
+void recordDeletePurchasePID(Environment& env, vector<Purchase>::iterator it) {
+	env.purchaseData.erase((*it).getId());
+	env.purchaseList.erase(it);
 }
 
 void recordDeleteMain(Environment& env) {
@@ -109,7 +106,7 @@ void recordDeleteMain(Environment& env) {
 	string id;
 
 	switch (menuNum) {
-		case 1: 
+		case 1: // Member
 			{
 				cout << "Enter Id what you want to delete." << endl << ">> ";
 				cin >> id;
@@ -118,15 +115,14 @@ void recordDeleteMain(Environment& env) {
 					break;
 				} // not found
 				Member mtemp;
-				recordDeletePurchaseMID(env.purchaseData,
-						env.purchaseList, id);
+				recordDeletePurchaseMID(env, id);
 				recordDeleteDat(env.memberData[id], "../built/fileOfMember.dat", mtemp);
 				env.memberData.erase(id);
 			}
 			break;
 
-		case 2: 
-			{	
+		case 2: // Stock 
+			{
 				cout << "Enter Id what you want to delete." << endl << ">> ";
 				cin >> id;
 				if (env.stockData.find(id) == env.stockData.end()) {
@@ -134,13 +130,12 @@ void recordDeleteMain(Environment& env) {
 					break;
 				} // not found
 				Stock stemp;
-				recordDeletePurchaseSID(env.purchaseData,
-						env.purchaseList, id);
+				recordDeletePurchaseSID(env, id);
 				recordDeleteDat(env.stockData[id], "../built/fileOfStock.dat", stemp);
 				env.stockData.erase(id);
 			}
 			break;
-		case 3: 
+		case 3: // Purchase
 			{
 				cout << "Select the type." << endl;
 				cout << "1: MemberId" << endl << "2: StockId" << endl << "3: PurchaseId" << endl;
@@ -152,29 +147,30 @@ void recordDeleteMain(Environment& env) {
 					break;
 				}
 
-				cout << "Enter Id what you want to delete." << endl << ">> ";
+				cout << "Enter Id that you want to delete." << endl << ">> ";
 				cin >> id;
-
-				vector<Purchase>::iterator it = findFromEnv(env.purchaseList, id, flag);
-				// not Found
-				if (it == env.purchaseList.end()) { break; }
 
 				switch (flag) {
 					case 1: // Member
-						recordDeletePurchaseMID(env.purchaseData,
-								env.purchaseList, id);
+						recordDeletePurchaseMID(env, id);
 						break;
-					case 2: // StockId
-						recordDeletePurchaseSID(env.purchaseData, 
-								env.purchaseList, id);
-						break;
+					case 2: { // StockId
+								recordDeletePurchaseSID(env, id);
+							} break;
 					case 3: // Purchase
-						recordDeletePurchasePID(env.purchaseData,
-								env.purchaseList, it);
-						break;
+						{
+							vector<Purchase> pList = env.purchaseList;
+							std::vector<Purchase>::iterator it =
+								pList.begin();
+							for (; it != pList.end(); ++it) {
+								if ((*it).getId() == id)
+									break;
+							}
+							if (it != pList.end())
+								recordDeletePurchasePID(env, it);
+						} break;
 				}
-			}
-			break;
+			} break;
 		case 4: break;
 	}
 }

@@ -32,7 +32,7 @@ void recordSearchMain(Environment& env) {
 	switch (menuNum) {
 		case 1: 
 			{
-				cout << "Enter Id what you search" << endl << ">> ";
+				cout << "Enter Id that you search" << endl << ">> ";
 				cin >> id;
 				FINDINDATA(env.memberData, id, findFlag);
 				if (findFlag) {
@@ -51,7 +51,7 @@ void recordSearchMain(Environment& env) {
 			break;
 		case 2: 
 			{
-				cout << "Enter Id what you search" << endl << ">> ";
+				cout << "Enter Id that you search" << endl << ">> ";
 				cin >> id;
 				FINDINDATA(env.stockData, id, findFlag);
 				if (findFlag) {
@@ -70,7 +70,7 @@ void recordSearchMain(Environment& env) {
 			break;
 		case 3: 
 			{
-				cout << "Select the ID type what you will find in." << endl;
+				cout << "Select the ID type that you will find in." << endl;
 				cout << "1: MemberId" << endl << "2: StockId" << endl << "3: PurchaseId" << endl;
 
 				int flag;
@@ -82,10 +82,7 @@ void recordSearchMain(Environment& env) {
 
 				cout << "Enter Id what you search" << endl << ">> ";
 				cin >> id;
-				std::vector<Purchase>::iterator it = findFromEnv(env.purchaseList, id, flag);
-
-				if (it != env.purchaseList.end()) { cout << "Element found in purchaseList" << *it << endl; }
-				else { cout << "Element not found" << endl; }
+				findFromEnv(env.purchaseList, id, flag);
 			}
 			break;
 		case 4: break;
