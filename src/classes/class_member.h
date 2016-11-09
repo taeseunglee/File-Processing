@@ -20,6 +20,8 @@ class Member {
 		string	address;
 		string	birthday;
 		string	email;
+		string	key;
+		string	level;
 
 	public:
 		// defualt 
@@ -49,6 +51,7 @@ class Member {
 
 		bool Pack (IOBuffer & Buffer) const;
 		bool Unpack (IOBuffer & Buffer);
+		char* Key();
 };
 
 
