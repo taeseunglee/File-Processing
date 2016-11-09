@@ -70,32 +70,36 @@ void setEnvironment(Environment &env) {
 }
 
 
-// if it == purchaseList.end(), searching "purchase" is failed.
-vector <Purchase>::iterator findFromEnv (vector<Purchase>& purchaseList, string id, int flag)
+void findFromEnv (vector<Purchase>& purchaseList, string id, int flag)
 {
 	std::vector<Purchase>::iterator it = purchaseList.begin();
 	switch (flag) {
 		case 1: // Member
 			{
 				for (; it != purchaseList.end(); ++it)  {
-					if ((*it).getMemberId() == id) { break; }
+					if ((*it).getMemberId() == id) { 
+						cout << *it << endl;
+					}
 				}
 			} break;
 		case 2: // Stock
 			{
 				for (; it != purchaseList.end(); ++it)  {
-					if ((*it).getStockId() == id) { break; }
+					if ((*it).getStockId() == id) {
+						cout << *it << endl;
+					}
 				}
 			} break;
 		case 3:
 			{ // Purchase
 				for (; it != purchaseList.end(); ++it)  {
-					if ((*it).getId() == id) { break; }
+					if ((*it).getId() == id) {
+						cout << *it << endl;
+						break;
+					}
 				}
 			} break;
 	}
-
-	return it;
 }
 
 #endif
