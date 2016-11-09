@@ -37,6 +37,7 @@ void Member::setPhoneNumber (const string& phoneNumber)	{ this->phoneNumber = ph
 void Member::setAddress		(const string& address)	{ this->address = address; }
 void Member::setBirthday	(const string& birthday){ this->birthday = birthday; }
 void Member::setEmail		(const string& email)	{ this->email = email; }
+void Member::setLevel		(const int& level)		{ this->level = level; }
 
 istream& operator >> (istream& is, Member& M) {
 	string str;

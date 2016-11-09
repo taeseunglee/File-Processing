@@ -21,7 +21,7 @@ class Member {
 		string	birthday;
 		string	email;
 		string	key;
-		string	level;
+		int		level;
 
 	public:
 		// defualt 
@@ -46,8 +46,10 @@ class Member {
 		void setAddress		(const string& address);
 		void setBirthday	(const string& birthday);
 		void setEmail		(const string& email);
+		void setLevel		(const int& level);
 
 		string getId() const { return id; };
+		int getLevel() const { return level; }
 
 		bool Pack (IOBuffer & Buffer) const;
 		bool Unpack (IOBuffer & Buffer);
