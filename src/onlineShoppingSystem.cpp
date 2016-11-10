@@ -82,22 +82,32 @@ void loginPurchaseSystem (Environment env) {
 	
 	// Admin or TestUser only can pass login.
 	// Start Admin Mode
-	int level = 0;
-	if (!id.compare("admin")) {
-		if (!password.compare("adminpass")) level = 1;
-		else level = -1;
+	string level;
+	bool findFlag = false;
+	Member mTemp;
+
+	FINDINDATA(env.memberData, id, findFlag);
+
+	if (findFlag) {
+		bool findMember = getMember(env.memberData[id], mTemp);
+		if (findMember) {
+			if (mTemp.isPassword(password))
+				level = mTemp.getLevel();
+			else
+				level = "-1";
+		}
 	}
-	else if (!id.compare("TestUser")){
-		if (!password.compare("T1234")) level = 9;
-		else level = -1;
+	else {
+		level = "-1";
 	}
-	else level = -1;
-			
-	switch (level) {
-		case -1: cout << "Login Failed" << endl; break;
-		case 1: while(adminModePurchaseSystem(env)); break;
-		case 9: while(generalUserModePurchaseSystem(env, id));break;
-	}
+
+	
+	if (!level.compare("1"))
+		while(adminModePurchaseSystem(env));
+	else if (!level.compare("9"))
+		while(generalUserModePurchaseSystem(env, id));
+	else
+		cout << "Login Failed. Incorrect Username or Password " << endl;
 }
 
 bool adminModePurchaseSystem (Environment &env) {
@@ -129,7 +139,7 @@ bool adminModePurchaseSystem (Environment &env) {
 
 bool generalUserModePurchaseSystem (Environment &env, string memberId) {
 	cout << "=================================================" << endl;
-	cout << "\t\tTicketPurchaseSystem - General User Mode -" << endl;
+	cout << "\tTicketPurchaseSystem - General User Mode -" << endl;
 	cout << "1: Modify Your record" << endl;
 	cout << "2: Unregister Your account" << endl;
 	cout << "3: Search Stock List" << endl;

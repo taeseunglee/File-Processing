@@ -29,11 +29,12 @@ void memberTest (Environment &env, int flag = 10) {
 	if (flag < 0)
 	{
 		memberFile.Create (filename, ios::out | ios::trunc);
+		int recAddr;
+
 		for (int i = 0; i < n; i++) {
 			Member m;
 			ifs >> m;
 
-			int recAddr;
 			if ((recAddr = memberFile.Write(m)) == -1) { cout << "Write Error!" << endl; }
 			else {
 				if (i < flag) { 
@@ -44,6 +45,24 @@ void memberTest (Environment &env, int flag = 10) {
 				}
 			}
 		}
+
+		Member admin;
+		admin.setId ("admin");
+		admin.setName ("taeseung");
+		admin.setPhoneNumber ("010-0000-0000");
+		admin.setAddress ("seoul");
+		admin.setBirthday ("0320");
+		admin.setEmail ("taeseunglee159@gmail.com");
+		admin.setLevel ("1");
+		admin.setPassword ("adminpass");
+
+		if ((recAddr = memberFile.Write(admin)) == -1) {
+			cout << "Write Admin Error!" << endl;
+		}
+		else {
+			env.memberData[admin.getId()] = recAddr;
+		}
+
 		memberFile.Close ();
 	}
 
