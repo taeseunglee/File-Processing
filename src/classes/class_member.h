@@ -11,6 +11,7 @@ using namespace std;
 
 #define LEN_BIRTHDAY 9
 #define MEM_MAX_BUF 256
+#define MEM_FILE_DAT "../built/fileOfMember.dat"
 
 class Member {
 	private:
@@ -21,12 +22,13 @@ class Member {
 		string	birthday;
 		string	email;
 		string	key;
-		int		level;
+		string	level;
+		string	password;
 
 	public:
 		// defualt 
 		Member () { };
-		Member (const string& id, const string& name, const string& phoneNumber, const string& address, const string& birthday, const string& email);
+		Member (const string& id, const string& name, const string& phoneNumber, const string& address, const string& birthday, const string& email, const string& level, const string& password);
 		// copy constructor
 		Member (const Member& M);
 
@@ -46,15 +48,17 @@ class Member {
 		void setAddress		(const string& address);
 		void setBirthday	(const string& birthday);
 		void setEmail		(const string& email);
-		void setLevel		(const int& level);
+		void setLevel		(const string& level);
+		void setPassword	(const string& password);
 
 		string getId() const { return id; };
-		int getLevel() const { return level; }
+		string getLevel() const { return level; }
+
+		bool isPassword (const string p);
 
 		bool Pack (IOBuffer & Buffer) const;
 		bool Unpack (IOBuffer & Buffer);
 		char* Key();
 };
-
 
 #endif
