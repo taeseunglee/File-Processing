@@ -49,17 +49,30 @@ string* makeListMember() {
 		,* addressList	= generateRandomAddress()
 		,* birthdayList	= generateRandomBirthday(NUM_OF_MEMBERS);
 
+	fprintf(fpMember, "%s|%s|%s|%s|%s|%s|%s|%s\n"
+			, "TestUser"
+			, "TestName"
+			, "010-7777-7777"
+			, "TestAddress"
+			, "19950101"
+			, "test@gmail.com"
+			, "9"
+			, "T1234"
+		   );
+
 	for (int i = 0; i < NUM_OF_MEMBERS; i++) {
 		string fullName = nameList[i][0]+ " " + nameList[i][1],
 			   fullEmail = nameList[i][0] + "@sogang.ac.kr";
 
-		fprintf(fpMember, "%s|%s|%s|%s|%s|%s\n"
-				,idList[i].c_str()							// ID
-				,fullName.c_str()							// Name
-				,phoneList[i].c_str()						// Phone Number
-				,addressList[i%NUM_CITY].c_str()						// Address
-				,birthdayList[i].c_str()					// Birthday
-				,fullEmail.c_str()							// E-mail
+		fprintf(fpMember, "%s|%s|%s|%s|%s|%s|%s|%s\n"
+				, idList[i].c_str()							// ID
+				, fullName.c_str()							// Name
+				, phoneList[i].c_str()						// Phone Number
+				, addressList[i%NUM_CITY].c_str()						// Address
+				, birthdayList[i].c_str()					// Birthday
+				, fullEmail.c_str()							// E-mail
+				, "9"
+				, idList[i].c_str()
 				);
 	}
 	
