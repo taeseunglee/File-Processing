@@ -11,6 +11,7 @@
 using namespace std;
 
 #define PUR_MAX_BUF 256
+#define PUR_FILE_DAT "../built/fileOfPurchase.dat"
 
 class Purchase {
 	string	purchaseId;

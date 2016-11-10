@@ -10,6 +10,7 @@
 using namespace std;
 
 #define STK_MAX_BUF 256
+#define STK_FILE_DAT "../built/fileOfStock.dat"
 
 class Stock {
 	private:
