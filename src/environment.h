@@ -4,6 +4,7 @@
 #include "./classes/class_member.h"
 #include "./classes/class_stock.h"
 #include "./classes/class_purchase.h"
+#include <string.h>
 #include <vector>
 #include <map>
 
@@ -69,6 +70,48 @@ void setEnvironment(Environment &env) {
 	ifs.close();
 }
 
+bool getMember(int recaddr, Member& m) {
+	char filename[MEM_MAX_BUF];
+	strlcpy (filename, MEM_FILE_DAT, MEM_MAX_BUF - 1);
+
+	DelimFieldBuffer buffer ('|', MEM_MAX_BUF);
+	RecordFile <Member> memberFile (buffer);
+
+	memberFile.Open (filename, ios::in);
+	if (memberFile.Read(m, recaddr) == -1)
+		return false;
+
+	return true;
+}
+/*
+bool getStock(int recaddr, Stock& s) {
+	char filename[STK_MAX_BUF];
+	strlcpy (filename, STK_FILE_DAT, STK_MAX_BUF);
+
+	DelimFieldBuffer buffer ('|', STK_MAX_BUF);
+	RecordFile <Stock> stockFile (buffer);
+
+	stockFile.Open (filename, ios::in);
+	if (stockFile.Read (s, recaddr) == -1)
+		return false;
+
+	return true;
+}
+
+bool getPurchase(int recaddr, Purchase& p) {
+	char filename[PUR_MAX_BUF];
+	strlcpy(filename, PUR_FILE_DAT, PUR_MAX_BUF - 1);
+
+	DelimFieldBuffer buffer ('|', PUR_MAX_BUF);
+	RecordFile <Purchase> purchaseFile (buffer);
+	purchaseFile.Open (filename, ios::in);
+
+	if (purchaseFile.Read(p, recaddr) == -1)
+		return false;
+
+	return true;
+}
+*/
 
 void findFromEnv (vector<Purchase>& purchaseList, string id, int flag)
 {
