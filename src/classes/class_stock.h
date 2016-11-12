@@ -21,6 +21,7 @@ class Stock {
 		string	stock;
 		string	washingInfo;
 		string	size;
+		string	key;
 
 	public:
 		Stock() {};
@@ -52,6 +53,8 @@ class Stock {
 
 		bool Pack (IOBuffer & Buffer) const;
 		bool Unpack (IOBuffer & Buffer);
+
+		char* Key();
 };
 
 #endif

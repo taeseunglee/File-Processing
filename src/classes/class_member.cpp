@@ -175,6 +175,6 @@ bool Member::Unpack (IOBuffer & Buffer) {
 }
 
 char* Member::Key() {
-	key.assign (id, id.length());
+	key.assign (id);
 	return (char*)(key.c_str());
 }
